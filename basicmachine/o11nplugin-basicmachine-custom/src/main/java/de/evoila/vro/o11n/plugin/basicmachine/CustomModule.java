@@ -23,7 +23,7 @@ public class CustomModule extends AbstractModule {
         this.plugin = new Plugin();
 
         plugin.setApiPrefix("BasicMachine");
-        plugin.setIcon("default-32x32.png");
+        plugin.setIcon("evoila.png");
         plugin.setDescription("BasicMachine");
         plugin.setDisplayName("BasicMachine");
         plugin.setName("BasicMachine");

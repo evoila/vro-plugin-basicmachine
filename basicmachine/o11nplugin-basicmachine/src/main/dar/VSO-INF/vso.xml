@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<module name="BasicMachine" version="${project.version}" build-number="${build.number}" image="images/default-32x32.png" display-name="BasicMachine">
+<module name="BasicMachine" version="${project.version}" build-number="${build.number}" image="images/evoila.png" display-name="BasicMachine">
     <description>BasicMachine</description>
     <installation mode="${installation.mode}">
         <action resource="packages/o11nplugin-example-package-${project.version}.package" type="install-package"/>
@@ -14,6 +14,28 @@
             <description></description>
             <properties>
                 <property name="name" property-accessor="name()" show-in-column="true" show-in-description="true"/>
+            </properties>
+            <inventory-children/>
+            <relations/>
+            <events/>
+        </finder>
+        <finder type="BasicMachine" datasource="main-datasource" image="images/generic.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BasicMachineBasicMachine">
+            <id accessor="getInternalId()"/>
+            <description></description>
+            <properties>
+                <property name="initialUsername" display-name="initialUsername" bean-property="initialUsername" show-in-column="true" show-in-description="true"></property>
+                <property name="description" display-name="description" bean-property="description" show-in-column="true" show-in-description="true"></property>
+                <property name="ipAddress" display-name="ipAddress" bean-property="ipAddress" show-in-column="true" show-in-description="true"></property>
+                <property name="name" display-name="name" bean-property="name" show-in-column="true" show-in-description="true"></property>
+                <property name="dnsName" display-name="dnsName" bean-property="dnsName" show-in-column="true" show-in-description="true"></property>
+                <property name="memory" display-name="memory" bean-property="memory" show-in-column="true" show-in-description="true"></property>
+                <property name="json" display-name="json" bean-property="json" show-in-column="true" show-in-description="true"></property>
+                <property name="initialPassword" display-name="initialPassword" bean-property="initialPassword" show-in-column="true" show-in-description="true"></property>
+                <property name="powerState" display-name="powerState" bean-property="powerState" show-in-column="true" show-in-description="true"></property>
+                <property name="snapshot" display-name="snapshot" bean-property="snapshot" show-in-column="true" show-in-description="true"></property>
+                <property name="cpu" display-name="cpu" bean-property="cpu" show-in-column="true" show-in-description="true"></property>
+                <property name="operatingSystem" display-name="operatingSystem" bean-property="operatingSystem" show-in-column="true" show-in-description="true"></property>
+                <property name="disksize" display-name="disksize" bean-property="disksize" show-in-column="true" show-in-description="true"></property>
             </properties>
             <inventory-children/>
             <relations/>
@@ -258,6 +280,49 @@ fraction is &amp;gt; 0.5; otherwise, behaves as for
 &lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
 &lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-5&lt;/td&gt;
 &lt;/table&gt;</attribute>
+            </attributes>
+            <methods/>
+        </object>
+        <object script-name="BasicMachineBasicMachine" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" create="true" is-deprecated="false">
+            <description></description>
+            <constructors>
+                <constructor>
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="name"></parameter>
+                        <parameter type="String" name="ipAddress"></parameter>
+                        <parameter type="String" name="dnsName"></parameter>
+                        <parameter type="String" name="cpu"></parameter>
+                        <parameter type="String" name="memory"></parameter>
+                        <parameter type="String" name="operatingSystem"></parameter>
+                        <parameter type="String" name="disksize"></parameter>
+                        <parameter type="String" name="powerState"></parameter>
+                        <parameter type="String" name="snapshot"></parameter>
+                        <parameter type="String" name="initialUsername"></parameter>
+                        <parameter type="String" name="initialPassword"></parameter>
+                        <parameter type="String" name="description"></parameter>
+                        <parameter type="String" name="json"></parameter>
+                    </parameters>
+                </constructor>
+                <constructor>
+                    <description></description>
+                    <parameters/>
+                </constructor>
+            </constructors>
+            <attributes>
+                <attribute script-name="memory" java-name="memory" return-type="String" read-only="false"></attribute>
+                <attribute script-name="disksize" java-name="disksize" return-type="String" read-only="false"></attribute>
+                <attribute script-name="ipAddress" java-name="ipAddress" return-type="String" read-only="false"></attribute>
+                <attribute script-name="description" java-name="description" return-type="String" read-only="false"></attribute>
+                <attribute script-name="dnsName" java-name="dnsName" return-type="String" read-only="false"></attribute>
+                <attribute script-name="cpu" java-name="cpu" return-type="String" read-only="false"></attribute>
+                <attribute script-name="operatingSystem" java-name="operatingSystem" return-type="String" read-only="false"></attribute>
+                <attribute script-name="initialUsername" java-name="initialUsername" return-type="String" read-only="false"></attribute>
+                <attribute script-name="powerState" java-name="powerState" return-type="String" read-only="false"></attribute>
+                <attribute script-name="initialPassword" java-name="initialPassword" return-type="String" read-only="false"></attribute>
+                <attribute script-name="name" java-name="name" return-type="String" read-only="false"></attribute>
+                <attribute script-name="json" java-name="json" return-type="String" read-only="false"></attribute>
+                <attribute script-name="snapshot" java-name="snapshot" return-type="String" read-only="false"></attribute>
             </attributes>
             <methods/>
         </object>
