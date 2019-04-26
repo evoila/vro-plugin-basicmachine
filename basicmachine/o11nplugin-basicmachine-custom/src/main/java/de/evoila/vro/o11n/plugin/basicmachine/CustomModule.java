@@ -23,8 +23,8 @@ public class CustomModule extends AbstractModule {
         this.plugin = new Plugin();
 
         plugin.setApiPrefix("BasicMachine");
-        plugin.setIcon("evoila.png");
-        plugin.setDescription("BasicMachine");
+        plugin.setIcon("folder.png");
+        plugin.setDescription("Representation of an generic Virtual Machine");
         plugin.setDisplayName("BasicMachine");
         plugin.setName("BasicMachine");
         plugin.setPackages(Collections.singletonList("o11nplugin-example-package-${project.version}.package"));

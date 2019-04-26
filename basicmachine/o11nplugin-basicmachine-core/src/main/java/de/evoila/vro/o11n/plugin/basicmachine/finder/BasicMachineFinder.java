@@ -24,4 +24,5 @@ public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
     public Sid assignId(BasicMachine basicMachine, Sid sid) {
         return null;
     }
+
 }

@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier(value = "basicmachine")
+@Qualifier(value = "basicMachine")
 @Scope(value = "prototype")
 public class BasicMachine implements Findable {
 
@@ -20,7 +20,7 @@ public class BasicMachine implements Findable {
     private String cpu;
     private String memory;
     private String operatingSystem;
-    private String disksize;
+    private String diskSize;
     private String powerState;
     private String snapshot;
     private String initialUsername;
@@ -28,25 +28,8 @@ public class BasicMachine implements Findable {
     private String description;
     private String json;
 
-    public BasicMachine(){
+    public BasicMachine() {
         this.id = Sid.unique();
-    }
-
-    public BasicMachine(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String disksize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
-        this();
-        this.name = name;
-        this.ipAddress = ipAddress;
-        this.dnsName = dnsName;
-        this.cpu = cpu;
-        this.memory = memory;
-        this.operatingSystem = operatingSystem;
-        this.disksize = disksize;
-        this.powerState = powerState;
-        this.snapshot = snapshot;
-        this.initialUsername = initialUsername;
-        this.initialPassword = initialPassword;
-        this.description = description;
-        this.json = json;
     }
 
     @Override
@@ -107,12 +90,12 @@ public class BasicMachine implements Findable {
         this.operatingSystem = operatingSystem;
     }
 
-    public String getDisksize() {
-        return disksize;
+    public String getDiskSize() {
+        return diskSize;
     }
 
-    public void setDisksize(String disksize) {
-        this.disksize = disksize;
+    public void setDiskSize(String diskSize) {
+        this.diskSize = diskSize;
     }
 
     public String getPowerState() {
@@ -161,5 +144,24 @@ public class BasicMachine implements Findable {
 
     public void setJson(String json) {
         this.json = json;
+    }
+
+    @Override
+    public String toString() {
+        return "BasicMachine["
+                +"id=" + id
+                +" name=" + name
+                +" ipAddres=" + ipAddress
+                +" dnsName=" + dnsName
+                +" cpu=" + cpu
+                +" memory=" + memory
+                +" operatingSystem=" + operatingSystem
+                +" diskSize=" + diskSize
+                +" powerState=" + powerState
+                +" snapshot=" + snapshot
+                +" initialUsername=" + initialUsername
+                +" initialPassword=" + initialPassword
+                +" description=" + description
+                +" json=" + json + "]";
     }
 }
