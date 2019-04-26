@@ -15,7 +15,7 @@ public interface ConfigPersister {
 
     void delete(BasicMachine basicMachine);
 
-    void addChangeListener(ConfigChangeListener configChangeListener);
+    void registerChangeListener(ConfigChangeListener configChangeListener);
 
     void refresh();
 

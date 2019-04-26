@@ -62,12 +62,57 @@ public class ConfigPersisterImpl implements ConfigPersister {
 
     @Override
     public BasicMachine findById(Sid id) {
-        return null;
+
+        if(id == null){
+           LOG.warn("Sid can not be null!");
+           return null;
+        }
+
+        IEndpointConfiguration endpointConfiguration;
+
+        try{
+            endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(id.toString());
+
+            return convertToBasicMachine(endpointConfiguration);
+
+        } catch (IOException e){
+            LOG.error("Can not find BasicMachine with id:" + id.toString(), e);
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public BasicMachine save(BasicMachine basicMachine) {
-        return null;
+
+        if(basicMachine == null || basicMachine.getId() == null){
+            LOG.error("Can not save BasicMachine. Is null or id is missing!");
+            throw new RuntimeException("BasicMachine is invalid.");
+        }
+
+        if(basicMachineAlreadyExists(basicMachine))
+            throw new RuntimeException("BasicMachine with same name already exists: " + basicMachine + "\n");
+
+        try{
+
+            IEndpointConfiguration endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(basicMachine.getId().toString());
+
+            if(endpointConfiguration == null){
+
+                endpointConfiguration = endpointConfigurationService.newEndpointConfiguration(basicMachine.getId().toString());
+
+            }
+
+            convertToIEndpointConfiguration(endpointConfiguration, basicMachine);
+
+            endpointConfigurationService.saveEndpointConfiguration(endpointConfiguration);
+
+            return basicMachine;
+
+        } catch (IOException e) {
+            LOG.error("Error saving BasicMachine: " + basicMachine, e);
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
@@ -76,12 +121,44 @@ public class ConfigPersisterImpl implements ConfigPersister {
     }
 
     @Override
-    public void addChangeListener(ConfigChangeListener configChangeListener) {
+    public void registerChangeListener(ConfigChangeListener configChangeListener) {
         listeners.add(configChangeListener);
     }
 
     @Override
     public void refresh() {
+
+    }
+
+    private boolean basicMachineAlreadyExists(BasicMachine basicMachine){
+
+        BasicMachine result = findBasicMachineByName(basicMachine.getName());
+
+        if(result != null && !((result.getId().toString()).equals(basicMachine.getId().toString()))){
+            return true;
+        }
+
+        return false;
+    }
+
+    private BasicMachine findBasicMachineByName(String name){
+
+        if(name == null)
+            throw new RuntimeException("Name can not be null!");
+
+        Collection<BasicMachine> basicMachines = findAll();
+
+        for(BasicMachine basicMachine: basicMachines){
+            if(name.equals(basicMachine.getName()))
+                return basicMachine;
+        }
+
+        return null;
+    }
+
+    private void convertToIEndpointConfiguration(IEndpointConfiguration endpointConfiguration, BasicMachine basicMachine){
+
+
 
     }
 
