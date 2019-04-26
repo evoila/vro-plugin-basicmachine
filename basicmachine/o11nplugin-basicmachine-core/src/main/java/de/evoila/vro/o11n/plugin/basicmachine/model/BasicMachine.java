@@ -34,6 +34,11 @@ public class BasicMachine implements Findable {
         this.id = Sid.unique();
     }
 
+    public BasicMachine(Sid sid){
+        super();
+        this.id = sid;
+    }
+
     @Override
     public Sid getInternalId() {
         return id;
