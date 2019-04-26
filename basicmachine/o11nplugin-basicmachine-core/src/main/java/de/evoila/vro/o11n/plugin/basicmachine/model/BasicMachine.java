@@ -11,11 +11,10 @@ import java.util.Objects;
 @Component
 @Qualifier(value = "basicMachine")
 @Scope(value = "prototype")
-public class BasicMachine implements Findable {
+public class BasicMachine extends RootObject implements Findable {
 
     public static final String TYPE = "BasicMachine";
 
-    private final Sid id;
     private String name;
     private String ipAddress;
     private String dnsName;
@@ -31,17 +30,17 @@ public class BasicMachine implements Findable {
     private String json;
 
     public BasicMachine() {
-        this.id = Sid.unique();
+        this(Sid.unique());
     }
 
     public BasicMachine(Sid sid){
-        super();
-        this.id = sid;
+        super(sid);
+        getConfigPersister().save(this);
     }
 
     @Override
     public Sid getInternalId() {
-        return id;
+        return getId();
     }
 
     @Override
@@ -155,7 +154,7 @@ public class BasicMachine implements Findable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(getId());
     }
 
     @Override
@@ -163,13 +162,13 @@ public class BasicMachine implements Findable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BasicMachine that = (BasicMachine) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(getId(), that.getId());
     }
 
     @Override
     public String toString() {
         return "BasicMachine["
-                +"id=" + id
+                +"id=" + getId()
                 +" name=" + name
                 +" ipAddres=" + ipAddress
                 +" dnsName=" + dnsName
