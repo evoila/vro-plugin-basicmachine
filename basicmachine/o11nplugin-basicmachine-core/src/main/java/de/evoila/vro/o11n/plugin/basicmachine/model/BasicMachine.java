@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
 @Qualifier(value = "basicMachine")
 @Scope(value = "prototype")
@@ -144,6 +146,19 @@ public class BasicMachine implements Findable {
 
     public void setJson(String json) {
         this.json = json;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BasicMachine that = (BasicMachine) o;
+        return Objects.equals(id, that.id);
     }
 
     @Override
