@@ -4,15 +4,21 @@ import com.vmware.o11n.sdk.modeldriven.FoundObject;
 import com.vmware.o11n.sdk.modeldriven.ObjectFinder;
 import com.vmware.o11n.sdk.modeldriven.PluginContext;
 import com.vmware.o11n.sdk.modeldriven.Sid;
+import de.evoila.vro.o11n.plugin.basicmachine.config.LocalRepository;
 import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachine;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
 
+    @Autowired
+    private LocalRepository localRepository;
+
+
     @Override
     public BasicMachine find(PluginContext pluginContext, String s, Sid sid) {
-        return null;
+        return localRepository.findById(sid);
     }
 
     @Override
@@ -22,7 +28,7 @@ public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
 
     @Override
     public Sid assignId(BasicMachine basicMachine, Sid sid) {
-        return null;
+        return basicMachine.getInternalId();
     }
 
 }
