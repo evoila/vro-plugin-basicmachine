@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<module name="BasicMachine" version="${project.version}" build-number="${build.number}" image="images/evoila.png" display-name="BasicMachine">
-    <description>BasicMachine</description>
+<module name="BasicMachine" version="${project.version}" build-number="${build.number}" image="images/folder.png" display-name="BasicMachine">
+    <description>Representation of an generic Virtual Machine</description>
     <installation mode="${installation.mode}">
         <action resource="packages/o11nplugin-example-package-${project.version}.package" type="install-package"/>
     </installation>
@@ -9,16 +9,6 @@
         <finder-datasource name="main-datasource" adaptor-class="de.evoila.vro.o11n.plugin.basicmachine.BasicMachinePluginAdaptor" concurrent-call="false" anonymous-login-mode="internal"/>
     </finder-datasources>
     <finders>
-        <finder type="RoundingMode" datasource="main-datasource" image="images/enum.png" java-class="java.math.RoundingMode" script-object="BasicMachineRoundingMode">
-            <id accessor="name()"/>
-            <description></description>
-            <properties>
-                <property name="name" property-accessor="name()" show-in-column="true" show-in-description="true"/>
-            </properties>
-            <inventory-children/>
-            <relations/>
-            <events/>
-        </finder>
         <finder type="BasicMachine" datasource="main-datasource" image="images/generic.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BasicMachineBasicMachine">
             <id accessor="getInternalId()"/>
             <description></description>
@@ -35,275 +25,25 @@
                 <property name="snapshot" display-name="snapshot" bean-property="snapshot" show-in-column="true" show-in-description="true"></property>
                 <property name="cpu" display-name="cpu" bean-property="cpu" show-in-column="true" show-in-description="true"></property>
                 <property name="operatingSystem" display-name="operatingSystem" bean-property="operatingSystem" show-in-column="true" show-in-description="true"></property>
-                <property name="disksize" display-name="disksize" bean-property="disksize" show-in-column="true" show-in-description="true"></property>
+                <property name="diskSize" display-name="diskSize" bean-property="diskSize" show-in-column="true" show-in-description="true"></property>
             </properties>
             <inventory-children/>
             <relations/>
             <events/>
         </finder>
         <finder type="_ROOT" datasource="main-datasource" hidden="true">
-            <inventory-children/>
-            <relations/>
+            <inventory-children>
+                <relation-link name="basicmachines"/>
+            </inventory-children>
+            <relations>
+                <relation name="basicmachines" type="BasicMachine"/>
+            </relations>
         </finder>
     </finders>
     <scripting-objects>
-        <object script-name="BasicMachineRoundingMode" java-class="java.math.RoundingMode" create="false" is-deprecated="false">
-            <description>Specifies a &lt;i&gt;rounding behavior&lt;/i&gt; for numerical operations
-capable of discarding precision. Each rounding mode indicates how
-the least significant returned digit of a rounded result is to be
-calculated.  If fewer digits are returned than the digits needed to
-represent the exact numerical result, the discarded digits will be
-referred to as the &lt;i&gt;discarded fraction&lt;/i&gt; regardless the digits'
-contribution to the value of the number.  In other words,
-considered as a numerical value, the discarded fraction could have
-an absolute value greater than one.
-
-&lt;p&gt;Each rounding mode description includes a table listing how
-different two-digit decimal values would round to a one digit
-decimal value under the rounding mode in question.  The result
-column in the tables could be gotten by creating a
-{@code BigDecimal} number with the specified value, forming a
-{@link MathContext} object with the proper settings
-({@code precision} set to {@code 1}, and the
-{@code roundingMode} set to the rounding mode in question), and
-calling {@link BigDecimal#round round} on this number with the
-proper {@code MathContext}.  A summary table showing the results
-of these rounding operations for all rounding modes appears below.
-
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Summary of Rounding Operations Under Different Rounding Modes&lt;/b&gt;&lt;/caption&gt;
-&lt;tr&gt;&lt;th&gt;&lt;/th&gt;&lt;th colspan=8&gt;Result of rounding input to one digit with the given
-                          rounding mode&lt;/th&gt;
-&lt;tr valign=top&gt;
-&lt;th&gt;Input Number&lt;/th&gt;         &lt;th&gt;{@code UP}&lt;/th&gt;
-                                          &lt;th&gt;{@code DOWN}&lt;/th&gt;
-                                                       &lt;th&gt;{@code CEILING}&lt;/th&gt;
-                                                                      &lt;th&gt;{@code FLOOR}&lt;/th&gt;
-                                                                                   &lt;th&gt;{@code HALF_UP}&lt;/th&gt;
-                                                                                                  &lt;th&gt;{@code HALF_DOWN}&lt;/th&gt;
-                                                                                                                   &lt;th&gt;{@code HALF_EVEN}&lt;/th&gt;
-                                                                                                                                    &lt;th&gt;{@code UNNECESSARY}&lt;/th&gt;
-
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;6&lt;/td&gt;  &lt;td&gt;5&lt;/td&gt;    &lt;td&gt;6&lt;/td&gt;    &lt;td&gt;5&lt;/td&gt;  &lt;td&gt;6&lt;/td&gt;      &lt;td&gt;5&lt;/td&gt;       &lt;td&gt;6&lt;/td&gt;       &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;3&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;    &lt;td&gt;3&lt;/td&gt;    &lt;td&gt;2&lt;/td&gt;  &lt;td&gt;3&lt;/td&gt;      &lt;td&gt;2&lt;/td&gt;       &lt;td&gt;2&lt;/td&gt;       &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;    &lt;td&gt;2&lt;/td&gt;    &lt;td&gt;1&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;      &lt;td&gt;2&lt;/td&gt;       &lt;td&gt;2&lt;/td&gt;       &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;    &lt;td&gt;2&lt;/td&gt;    &lt;td&gt;1&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;      &lt;td&gt;1&lt;/td&gt;       &lt;td&gt;1&lt;/td&gt;       &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;    &lt;td&gt;1&lt;/td&gt;    &lt;td&gt;1&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;      &lt;td&gt;1&lt;/td&gt;       &lt;td&gt;1&lt;/td&gt;       &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;   &lt;td&gt;-1&lt;/td&gt;   &lt;td&gt;-1&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;     &lt;td&gt;-1&lt;/td&gt;      &lt;td&gt;-1&lt;/td&gt;      &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;   &lt;td&gt;-1&lt;/td&gt;   &lt;td&gt;-2&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;     &lt;td&gt;-1&lt;/td&gt;      &lt;td&gt;-1&lt;/td&gt;      &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;   &lt;td&gt;-1&lt;/td&gt;   &lt;td&gt;-2&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;     &lt;td&gt;-2&lt;/td&gt;      &lt;td&gt;-2&lt;/td&gt;      &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-3&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;   &lt;td&gt;-2&lt;/td&gt;   &lt;td&gt;-3&lt;/td&gt; &lt;td&gt;-3&lt;/td&gt;     &lt;td&gt;-2&lt;/td&gt;      &lt;td&gt;-2&lt;/td&gt;      &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-6&lt;/td&gt; &lt;td&gt;-5&lt;/td&gt;   &lt;td&gt;-5&lt;/td&gt;   &lt;td&gt;-6&lt;/td&gt; &lt;td&gt;-6&lt;/td&gt;     &lt;td&gt;-5&lt;/td&gt;      &lt;td&gt;-6&lt;/td&gt;      &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;/table&gt;
-
-
-&lt;p&gt;This {@code enum} is intended to replace the integer-based
-enumeration of rounding mode constants in {@link BigDecimal}
-({@link BigDecimal#ROUND_UP}, {@link BigDecimal#ROUND_DOWN},
-etc. ).</description>
-            <constructors/>
-            <attributes>
-                <attribute script-name="DOWN" java-name="DOWN" return-type="BasicMachineRoundingMode" read-only="true">Rounding mode to round towards zero.  Never increments the digit
-prior to a discarded fraction (i.e., truncates).  Note that this
-rounding mode never increases the magnitude of the calculated value.
-
-&lt;p&gt;Example:
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Rounding mode DOWN Examples&lt;/b&gt;&lt;/caption&gt;
-&lt;tr valign=top&gt;&lt;th&gt;Input Number&lt;/th&gt;
-   &lt;th&gt;Input rounded to one digit&lt;br&gt; with {@code DOWN} rounding
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;5&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-5&lt;/td&gt;
-&lt;/table&gt;</attribute>
-                <attribute script-name="FLOOR" java-name="FLOOR" return-type="BasicMachineRoundingMode" read-only="true">Rounding mode to round towards negative infinity.  If the
-result is positive, behave as for {@code RoundingMode.DOWN};
-if negative, behave as for {@code RoundingMode.UP}.  Note that
-this rounding mode never increases the calculated value.
-
-&lt;p&gt;Example:
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Rounding mode FLOOR Examples&lt;/b&gt;&lt;/caption&gt;
-&lt;tr valign=top&gt;&lt;th&gt;Input Number&lt;/th&gt;
-   &lt;th&gt;Input rounded to one digit&lt;br&gt; with {@code FLOOR} rounding
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;5&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-3&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-6&lt;/td&gt;
-&lt;/table&gt;</attribute>
-                <attribute script-name="UNNECESSARY" java-name="UNNECESSARY" return-type="BasicMachineRoundingMode" read-only="true">Rounding mode to assert that the requested operation has an exact
-result, hence no rounding is necessary.  If this rounding mode is
-specified on an operation that yields an inexact result, an
-{@code ArithmeticException} is thrown.
-&lt;p&gt;Example:
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Rounding mode UNNECESSARY Examples&lt;/b&gt;&lt;/caption&gt;
-&lt;tr valign=top&gt;&lt;th&gt;Input Number&lt;/th&gt;
-   &lt;th&gt;Input rounded to one digit&lt;br&gt; with {@code UNNECESSARY} rounding
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;throw {@code ArithmeticException}&lt;/td&gt;
-&lt;/table&gt;</attribute>
-                <attribute script-name="CEILING" java-name="CEILING" return-type="BasicMachineRoundingMode" read-only="true">Rounding mode to round towards positive infinity.  If the
-result is positive, behaves as for {@code RoundingMode.UP};
-if negative, behaves as for {@code RoundingMode.DOWN}.  Note
-that this rounding mode never decreases the calculated value.
-
-&lt;p&gt;Example:
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Rounding mode CEILING Examples&lt;/b&gt;&lt;/caption&gt;
-&lt;tr valign=top&gt;&lt;th&gt;Input Number&lt;/th&gt;
-   &lt;th&gt;Input rounded to one digit&lt;br&gt; with {@code CEILING} rounding
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;6&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;3&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-5&lt;/td&gt;
-&lt;/table&gt;</attribute>
-                <attribute script-name="HALF_EVEN" java-name="HALF_EVEN" return-type="BasicMachineRoundingMode" read-only="true">Rounding mode to round towards the {@literal "nearest neighbor"}
-unless both neighbors are equidistant, in which case, round
-towards the even neighbor.  Behaves as for
-{@code RoundingMode.HALF_UP} if the digit to the left of the
-discarded fraction is odd; behaves as for
-{@code RoundingMode.HALF_DOWN} if it's even.  Note that this
-is the rounding mode that statistically minimizes cumulative
-error when applied repeatedly over a sequence of calculations.
-It is sometimes known as {@literal "Banker's rounding,"} and is
-chiefly used in the USA.  This rounding mode is analogous to
-the rounding policy used for {@code float} and {@code double}
-arithmetic in Java.
-
-&lt;p&gt;Example:
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Rounding mode HALF_EVEN Examples&lt;/b&gt;&lt;/caption&gt;
-&lt;tr valign=top&gt;&lt;th&gt;Input Number&lt;/th&gt;
-   &lt;th&gt;Input rounded to one digit&lt;br&gt; with {@code HALF_EVEN} rounding
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;6&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-6&lt;/td&gt;
-&lt;/table&gt;</attribute>
-                <attribute script-name="UP" java-name="UP" return-type="BasicMachineRoundingMode" read-only="true">Rounding mode to round away from zero.  Always increments the
-digit prior to a non-zero discarded fraction.  Note that this
-rounding mode never decreases the magnitude of the calculated
-value.
-
-&lt;p&gt;Example:
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Rounding mode UP Examples&lt;/b&gt;&lt;/caption&gt;
-&lt;tr valign=top&gt;&lt;th&gt;Input Number&lt;/th&gt;
-   &lt;th&gt;Input rounded to one digit&lt;br&gt; with {@code UP} rounding
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;6&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;3&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-3&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-6&lt;/td&gt;
-&lt;/table&gt;</attribute>
-                <attribute script-name="HALF_UP" java-name="HALF_UP" return-type="BasicMachineRoundingMode" read-only="true">Rounding mode to round towards {@literal "nearest neighbor"}
-unless both neighbors are equidistant, in which case round up.
-Behaves as for {@code RoundingMode.UP} if the discarded
-fraction is &amp;ge; 0.5; otherwise, behaves as for
-{@code RoundingMode.DOWN}.  Note that this is the rounding
-mode commonly taught at school.
-
-&lt;p&gt;Example:
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Rounding mode HALF_UP Examples&lt;/b&gt;&lt;/caption&gt;
-&lt;tr valign=top&gt;&lt;th&gt;Input Number&lt;/th&gt;
-   &lt;th&gt;Input rounded to one digit&lt;br&gt; with {@code HALF_UP} rounding
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;6&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;3&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-3&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-6&lt;/td&gt;
-&lt;/table&gt;</attribute>
-                <attribute script-name="HALF_DOWN" java-name="HALF_DOWN" return-type="BasicMachineRoundingMode" read-only="true">Rounding mode to round towards {@literal "nearest neighbor"}
-unless both neighbors are equidistant, in which case round
-down.  Behaves as for {@code RoundingMode.UP} if the discarded
-fraction is &amp;gt; 0.5; otherwise, behaves as for
-{@code RoundingMode.DOWN}.
-
-&lt;p&gt;Example:
-&lt;table border&gt;
-&lt;caption&gt;&lt;b&gt;Rounding mode HALF_DOWN Examples&lt;/b&gt;&lt;/caption&gt;
-&lt;tr valign=top&gt;&lt;th&gt;Input Number&lt;/th&gt;
-   &lt;th&gt;Input rounded to one digit&lt;br&gt; with {@code HALF_DOWN} rounding
-&lt;tr align=right&gt;&lt;td&gt;5.5&lt;/td&gt;  &lt;td&gt;5&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;2.5&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.6&lt;/td&gt;  &lt;td&gt;2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.1&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;1.0&lt;/td&gt;  &lt;td&gt;1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.0&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.1&lt;/td&gt; &lt;td&gt;-1&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-1.6&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-2.5&lt;/td&gt; &lt;td&gt;-2&lt;/td&gt;
-&lt;tr align=right&gt;&lt;td&gt;-5.5&lt;/td&gt; &lt;td&gt;-5&lt;/td&gt;
-&lt;/table&gt;</attribute>
-            </attributes>
-            <methods/>
-        </object>
         <object script-name="BasicMachineBasicMachine" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" create="true" is-deprecated="false">
             <description></description>
             <constructors>
-                <constructor>
-                    <description></description>
-                    <parameters>
-                        <parameter type="String" name="name"></parameter>
-                        <parameter type="String" name="ipAddress"></parameter>
-                        <parameter type="String" name="dnsName"></parameter>
-                        <parameter type="String" name="cpu"></parameter>
-                        <parameter type="String" name="memory"></parameter>
-                        <parameter type="String" name="operatingSystem"></parameter>
-                        <parameter type="String" name="disksize"></parameter>
-                        <parameter type="String" name="powerState"></parameter>
-                        <parameter type="String" name="snapshot"></parameter>
-                        <parameter type="String" name="initialUsername"></parameter>
-                        <parameter type="String" name="initialPassword"></parameter>
-                        <parameter type="String" name="description"></parameter>
-                        <parameter type="String" name="json"></parameter>
-                    </parameters>
-                </constructor>
                 <constructor>
                     <description></description>
                     <parameters/>
@@ -311,13 +51,13 @@ fraction is &amp;gt; 0.5; otherwise, behaves as for
             </constructors>
             <attributes>
                 <attribute script-name="memory" java-name="memory" return-type="String" read-only="false"></attribute>
-                <attribute script-name="disksize" java-name="disksize" return-type="String" read-only="false"></attribute>
                 <attribute script-name="ipAddress" java-name="ipAddress" return-type="String" read-only="false"></attribute>
                 <attribute script-name="description" java-name="description" return-type="String" read-only="false"></attribute>
                 <attribute script-name="dnsName" java-name="dnsName" return-type="String" read-only="false"></attribute>
                 <attribute script-name="cpu" java-name="cpu" return-type="String" read-only="false"></attribute>
                 <attribute script-name="operatingSystem" java-name="operatingSystem" return-type="String" read-only="false"></attribute>
                 <attribute script-name="initialUsername" java-name="initialUsername" return-type="String" read-only="false"></attribute>
+                <attribute script-name="diskSize" java-name="diskSize" return-type="String" read-only="false"></attribute>
                 <attribute script-name="powerState" java-name="powerState" return-type="String" read-only="false"></attribute>
                 <attribute script-name="initialPassword" java-name="initialPassword" return-type="String" read-only="false"></attribute>
                 <attribute script-name="name" java-name="name" return-type="String" read-only="false"></attribute>
