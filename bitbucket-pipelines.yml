@@ -7,4 +7,4 @@ pipelines:
           - maven
         script: # Modify the commands below to build your repository.
           - mvn -version
-          - mvn -f https://bitbucket.org/larsatzinger/vro-plugin-basicmachine/src/master/basicmachine/pom.xml -B verify
+          - mvn -f ./basicmachine/pom.xml -B verify
