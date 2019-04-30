@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <module name="BasicMachine" version="${project.version}" build-number="${build.number}" image="images/folder.png" display-name="BasicMachine">
-    <description>Representation of an generic Virtual Machine</description>
+    <description>Basic Virtual Machine providing possibility to store a json string.</description>
     <installation mode="${installation.mode}">
-        <action resource="packages/o11nplugin-example-package-${project.version}.package" type="install-package"/>
+        <action resource="packages/de.evoila.vro.o11n.plugin.basicmachine" type="install-package"/>
     </installation>
     <inventory type="_ROOT"/>
     <finder-datasources>
         <finder-datasource name="main-datasource" adaptor-class="de.evoila.vro.o11n.plugin.basicmachine.BasicMachinePluginAdaptor" concurrent-call="false" anonymous-login-mode="internal"/>
     </finder-datasources>
     <finders>
-        <finder type="BasicMachine" datasource="main-datasource" image="images/generic.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BasicMachineBasicMachine">
+        <finder type="BasicMachine" datasource="main-datasource" image="images/default-16x16.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BasicMachineBasicMachine">
             <id accessor="getInternalId()"/>
             <description></description>
             <properties>

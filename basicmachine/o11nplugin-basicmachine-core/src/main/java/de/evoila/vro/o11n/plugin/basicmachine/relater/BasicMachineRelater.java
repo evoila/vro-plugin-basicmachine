@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RootHasConnections implements ObjectRelater<BasicMachine> {
+public class BasicMachineRelater implements ObjectRelater<BasicMachine> {
 
     @Autowired
     private LocalRepository localRepository;

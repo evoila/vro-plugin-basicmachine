@@ -2,6 +2,7 @@ package de.evoila.vro.o11n.plugin.basicmachine.config;
 
 import ch.dunes.vso.sdk.endpoints.IEndpointConfiguration;
 import ch.dunes.vso.sdk.endpoints.IEndpointConfigurationService;
+import com.vmware.o11n.plugin.sdk.spring.platform.GlobalPluginNotificationHandler;
 import com.vmware.o11n.sdk.modeldriven.Sid;
 import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachine;
 import org.slf4j.Logger;
@@ -24,6 +25,9 @@ public class ConfigPersisterImpl implements ConfigPersister {
 
     @Autowired
     IEndpointConfigurationService endpointConfigurationService;
+
+    @Autowired
+    private GlobalPluginNotificationHandler notificationHandler;
 
     public ConfigPersisterImpl() {
         listeners = new CopyOnWriteArrayList<>();
@@ -64,14 +68,17 @@ public class ConfigPersisterImpl implements ConfigPersister {
     public BasicMachine findById(Sid id) {
 
         if (id == null) {
-            LOG.warn("Sid can not be null!");
-            return null;
+            LOG.warn("id can not be null!");
+            throw new RuntimeException("id can not be null!");
         }
 
         IEndpointConfiguration endpointConfiguration;
 
         try {
             endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(id.toString());
+
+            if(endpointConfiguration == null)
+                return null;
 
             return convertToBasicMachine(endpointConfiguration);
 
@@ -98,13 +105,16 @@ public class ConfigPersisterImpl implements ConfigPersister {
 
             if (endpointConfiguration == null) {
 
-                endpointConfiguration = convertToIEndpointConfiguration(basicMachine);
+                endpointConfiguration = endpointConfigurationService.newEndpointConfiguration(basicMachine.getId().toString());
 
             }
+
+            convertToIEndpointConfiguration(endpointConfiguration, basicMachine);
 
             endpointConfigurationService.saveEndpointConfiguration(endpointConfiguration);
 
             notifyChangeListener(basicMachine);
+            notificationHandler.notifyElementsInvalidate();
 
             return basicMachine;
 
@@ -147,7 +157,7 @@ public class ConfigPersisterImpl implements ConfigPersister {
 
         BasicMachine result = findBasicMachineByName(basicMachine.getName());
 
-        if (result != null && !((result.getId().toString()).equals(basicMachine.getId().toString()))) {
+        if (result != null && ((result.getId().toString()).equals(basicMachine.getId().toString()))) {
             return true;
         }
 
@@ -169,15 +179,11 @@ public class ConfigPersisterImpl implements ConfigPersister {
         return null;
     }
 
-    private IEndpointConfiguration convertToIEndpointConfiguration(BasicMachine basicMachine) {
-
-        IEndpointConfiguration endpointConfiguration;
+    private void convertToIEndpointConfiguration(IEndpointConfiguration endpointConfiguration, BasicMachine basicMachine) {
 
         try {
-            endpointConfiguration = endpointConfigurationService.newEndpointConfiguration(basicMachine.getId().toString());
 
             endpointConfiguration.setString("id", basicMachine.getId().toString());
-            //
             endpointConfiguration.setString("name", basicMachine.getName());
             endpointConfiguration.setString("ipAddress", basicMachine.getIpAddress());
             endpointConfiguration.setString("dnsName", basicMachine.getDnsName());
@@ -192,24 +198,20 @@ public class ConfigPersisterImpl implements ConfigPersister {
             endpointConfiguration.setString("description", basicMachine.getDescription());
             endpointConfiguration.setString("json", basicMachine.getJson());
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             LOG.error("Can not convert BasicMachine to IEndpointConfiguration!", e);
             throw new RuntimeException(e);
         }
 
-
-        return endpointConfiguration;
     }
 
     private BasicMachine convertToBasicMachine(IEndpointConfiguration iEndpointConfiguration) {
-
-        BasicMachine basicMachine = null;
 
         try {
 
             Sid sid = Sid.valueOf(iEndpointConfiguration.getString("id"));
 
-            basicMachine = new BasicMachine(sid);
+            BasicMachine basicMachine = new BasicMachine(sid);
 
             basicMachine.setName(iEndpointConfiguration.getString("name"));
             basicMachine.setIpAddress(iEndpointConfiguration.getString("ipAddress"));
@@ -225,12 +227,13 @@ public class ConfigPersisterImpl implements ConfigPersister {
             basicMachine.setDescription(iEndpointConfiguration.getString("description"));
             basicMachine.setJson(iEndpointConfiguration.getString("json"));
 
+            return basicMachine;
+
         } catch (IllegalArgumentException e) {
             LOG.error("Can not convert IEndpointConfiguration[" + iEndpointConfiguration.getId() + "] to Type BasicMachine!", e);
             throw new RuntimeException(e);
         }
 
-        return basicMachine;
     }
 
     private void notifyChangeListener(BasicMachine basicMachine) {

@@ -24,10 +24,10 @@ public class CustomModule extends AbstractModule {
 
         plugin.setApiPrefix("BasicMachine");
         plugin.setIcon("folder.png");
-        plugin.setDescription("Representation of an generic Virtual Machine");
+        plugin.setDescription("Basic Virtual Machine providing possibility to store a json string.");
         plugin.setDisplayName("BasicMachine");
         plugin.setName("BasicMachine");
-        plugin.setPackages(Collections.singletonList("o11nplugin-example-package-${project.version}.package"));
+        plugin.setPackages(Collections.singletonList("de.evoila.vro.o11n.plugin.basicmachine"));
         plugin.setAdaptorClassName(de.evoila.vro.o11n.plugin.basicmachine.BasicMachinePluginAdaptor.class);
     }
 }

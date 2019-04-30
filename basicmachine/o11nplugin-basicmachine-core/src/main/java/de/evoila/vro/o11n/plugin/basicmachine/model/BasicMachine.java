@@ -2,18 +2,23 @@ package de.evoila.vro.o11n.plugin.basicmachine.model;
 
 import com.vmware.o11n.sdk.modeldriven.Findable;
 import com.vmware.o11n.sdk.modeldriven.Sid;
+import de.evoila.vro.o11n.plugin.basicmachine.config.ConfigPersisterImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import java.util.Objects;
 
 @Component
 @Qualifier(value = "basicMachine")
 @Scope(value = "prototype")
-public class BasicMachine extends RootObject implements Findable {
+public class BasicMachine implements Findable {
 
     public static final String TYPE = "BasicMachine";
+
+    private final Sid id;
 
     private String name;
     private String ipAddress;
@@ -29,23 +34,44 @@ public class BasicMachine extends RootObject implements Findable {
     private String description;
     private String json;
 
-    public BasicMachine() {
-        this(Sid.unique());
+    public BasicMachine(Sid id){
+        super();
+        Assert.notNull(id, "id can not be null!");
+        this.id = id;
     }
 
-    public BasicMachine(Sid sid){
-        super(sid);
-        getConfigPersister().save(this);
+    public BasicMachine() {
+        super();
+        id = Sid.unique();
+    }
+
+    public BasicMachine(@Autowired ConfigPersisterImpl configPersister, String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String  snapshot, String initialUsername, String initialPassword, String description, String json){
+        super();
+        id = Sid.unique();
+        this.name = name;
+        this.ipAddress = ipAddress;
+        this.dnsName = dnsName;
+        this.cpu = cpu;
+        this.memory = memory;
+        this.operatingSystem = operatingSystem;
+        this.diskSize = diskSize;
+        this.powerState = powerState;
+        this.snapshot = snapshot;
+        this.initialUsername = initialUsername;
+        this.initialPassword = initialPassword;
+        this.description = description;
+        this.json = json;
+        configPersister.save(this);
     }
 
     @Override
     public Sid getInternalId() {
-        return getId();
+        return id;
     }
 
     @Override
     public void setInternalId(Sid sid) {
-        // will be initialized via constructor
+        // set by constructor
     }
 
     public String getName() {
@@ -152,9 +178,14 @@ public class BasicMachine extends RootObject implements Findable {
         this.json = json;
     }
 
+    public Sid getId() {
+        return id;
+    }
+
+
     @Override
     public int hashCode() {
-        return Objects.hash(getId());
+        return Objects.hash(id);
     }
 
     @Override
@@ -168,19 +199,19 @@ public class BasicMachine extends RootObject implements Findable {
     @Override
     public String toString() {
         return "BasicMachine["
-                +"id=" + getId()
-                +" name=" + name
-                +" ipAddres=" + ipAddress
-                +" dnsName=" + dnsName
-                +" cpu=" + cpu
-                +" memory=" + memory
-                +" operatingSystem=" + operatingSystem
-                +" diskSize=" + diskSize
-                +" powerState=" + powerState
-                +" snapshot=" + snapshot
-                +" initialUsername=" + initialUsername
-                +" initialPassword=" + initialPassword
-                +" description=" + description
-                +" json=" + json + "]";
+                + "id=" + id
+                + " name=" + name
+                + " ipAddress=" + ipAddress
+                + " dnsName=" + dnsName
+                + " cpu=" + cpu
+                + " memory=" + memory
+                + " operatingSystem=" + operatingSystem
+                + " diskSize=" + diskSize
+                + " powerState=" + powerState
+                + " snapshot=" + snapshot
+                + " initialUsername=" + initialUsername
+                + " initialPassword=" + initialPassword
+                + " description=" + description
+                + " json=" + json + "]";
     }
 }
