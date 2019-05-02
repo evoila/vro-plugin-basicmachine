@@ -73,8 +73,8 @@ public class BasicMachineEndpoint implements EndpointPersister {
         try {
             endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(id.toString());
 
-            if(endpointConfiguration == null)
-                return null;
+            if (endpointConfiguration == null)
+                throw new RuntimeException("Can not find BasicMachine with id:" + id.toString());
 
             return convertToBasicMachineInfo(endpointConfiguration);
 
@@ -109,7 +109,7 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
             endpointConfigurationService.saveEndpointConfiguration(endpointConfiguration);
 
-            notifyChangeListener(machineInfo);
+            notifyChangeListenerOnSave(machineInfo);
 
             return machineInfo;
 
@@ -125,6 +125,7 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
         try {
             endpointConfigurationService.deleteEndpointConfiguration(machineInfo.getId().toString());
+            notifyChangeListenerOnDelete(machineInfo);
         } catch (IOException e) {
             LOG.error("Error while deleting endpoint configuration for BasicMachine: " + machineInfo);
             throw new RuntimeException(e);
@@ -143,7 +144,7 @@ public class BasicMachineEndpoint implements EndpointPersister {
         Collection<BasicMachineInfo> result = findAll();
 
         for (BasicMachineInfo machineInfo : result) {
-            notifyChangeListener(machineInfo);
+            notifyChangeListenerOnSave(machineInfo);
         }
 
     }
@@ -231,10 +232,18 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
     }
 
-    private void notifyChangeListener(BasicMachineInfo machineInfo) {
+    private void notifyChangeListenerOnSave(BasicMachineInfo machineInfo) {
 
         for (EndpointChangeListener listener : listeners) {
             listener.basicMachineSaved(machineInfo);
+        }
+
+    }
+
+    private void notifyChangeListenerOnDelete(BasicMachineInfo machineInfo) {
+
+        for (EndpointChangeListener listener : listeners) {
+            listener.basicMachineDeleted(machineInfo);
         }
 
     }
