@@ -7,6 +7,8 @@ package de.evoila.vro.o11n.plugin.basicmachine.model;
 import com.google.common.base.Objects;
 import com.vmware.o11n.sdk.modeldriven.Findable;
 import com.vmware.o11n.sdk.modeldriven.Sid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,8 @@ import org.springframework.stereotype.Component;
 public class BasicMachine implements Findable {
 
     public static final String TYPE = "BasicMachine";
+
+    private static final Logger LOG = LoggerFactory.getLogger(BasicMachine.class);
 
     private BasicMachineInfo machineInfo;
 
@@ -61,4 +65,5 @@ public class BasicMachine implements Findable {
                 "machineInfo=" + machineInfo +
                 '}';
     }
+
 }

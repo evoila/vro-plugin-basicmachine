@@ -25,7 +25,7 @@ public class CustomModule extends AbstractModule {
     public CustomModule() {
         this.plugin = new Plugin();
 
-        plugin.setApiPrefix("BasicMachine");
+        plugin.setApiPrefix("Bm");
         plugin.setIcon("folder.png");
         plugin.setDescription("Basic Virtual Machine providing possibility to store a json string.");
         plugin.setDisplayName("BasicMachine");
