@@ -2,6 +2,7 @@ package de.evoila.vro.o11n.plugin.basicmachine.config;
 
 import com.vmware.o11n.sdk.modeldriven.Sid;
 import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachine;
+import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -27,7 +28,7 @@ public class LocalRepository implements ConfigChangeListener, InitializingBean {
     }
 
     public BasicMachine findById(Sid id){
-        return localStorage.get(id);
+        return localStorage.get(id.getId());
     }
 
     public Collection<BasicMachine> findAll(){
@@ -35,26 +36,26 @@ public class LocalRepository implements ConfigChangeListener, InitializingBean {
     }
 
     @Override
-    public void basicMachineSaved(BasicMachine basicMachine) {
-        BasicMachine basicMachineToSave = (BasicMachine) applicationContext.getBean("basicMachine", basicMachine);
-        localStorage.put(basicMachine.getId(), basicMachineToSave);
+    public void basicMachineSaved(BasicMachineInfo machineInfo) {
+        BasicMachine newMachine = (BasicMachine) applicationContext.getBean("basicMachine", machineInfo);
+        localStorage.put(machineInfo.getId(), newMachine);
     }
 
     @Override
-    public void basicMachineUpdated(BasicMachine basicMachine) {
+    public void basicMachineUpdated(BasicMachineInfo machineInfo) {
         throw new UnsupportedOperationException("basicMachineUpdated(BasicMachine basicMachine) is not implemented yet!");
     }
 
     @Override
-    public void basicMachineDeleted(BasicMachine basicMachine) {
-        localStorage.remove(basicMachine.getId());
+    public void basicMachineDeleted(BasicMachineInfo machineInfo) {
+        localStorage.remove(machineInfo.getId());
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
 
         configPersister.registerChangeListener(this);
-        configPersister.refresh();
+        configPersister.reload();
 
     }
 

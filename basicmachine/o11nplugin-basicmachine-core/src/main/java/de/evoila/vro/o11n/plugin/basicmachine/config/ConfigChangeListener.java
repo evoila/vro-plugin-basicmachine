@@ -1,13 +1,13 @@
 package de.evoila.vro.o11n.plugin.basicmachine.config;
 
-import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachine;
+import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
 
 public interface ConfigChangeListener {
 
-    void basicMachineSaved(BasicMachine basicMachine);
+    void basicMachineSaved(BasicMachineInfo machineInfo);
 
-    void basicMachineUpdated(BasicMachine basicMachine);
+    void basicMachineUpdated(BasicMachineInfo machineInfo);
 
-    void basicMachineDeleted(BasicMachine basicMachine);
+    void basicMachineDeleted(BasicMachineInfo machineInfo);
 
 }

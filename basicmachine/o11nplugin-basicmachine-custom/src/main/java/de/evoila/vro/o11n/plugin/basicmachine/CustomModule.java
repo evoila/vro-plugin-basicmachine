@@ -16,7 +16,6 @@ public class CustomModule extends AbstractModule {
     protected void configure() {
         bind(AbstractMapping.class).toInstance(new CustomMapping());
         bind(Plugin.class).toInstance(plugin);
-        
     }
 
     public CustomModule() {

@@ -1,22 +1,22 @@
 package de.evoila.vro.o11n.plugin.basicmachine.config;
 
 import com.vmware.o11n.sdk.modeldriven.Sid;
-import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachine;
+import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
 
 import java.util.List;
 
 public interface ConfigPersister {
 
-    List<BasicMachine> findAll();
+    List<BasicMachineInfo> findAll();
 
-    BasicMachine findById(Sid id);
+    BasicMachineInfo findById(Sid id);
 
-    BasicMachine save(BasicMachine basicMachine);
+    BasicMachineInfo save(BasicMachineInfo basicMachineInfo);
 
-    void delete(BasicMachine basicMachine);
+    void delete(BasicMachineInfo basicMachineInfo);
 
     void registerChangeListener(ConfigChangeListener configChangeListener);
 
-    void refresh();
+    void reload();
 
 }
