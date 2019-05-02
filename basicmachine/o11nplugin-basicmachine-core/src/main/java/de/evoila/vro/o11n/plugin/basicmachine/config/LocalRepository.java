@@ -13,13 +13,13 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-public class LocalRepository implements ConfigChangeListener, InitializingBean {
+public class LocalRepository implements EndpointChangeListener, InitializingBean {
 
     @Autowired
     private ApplicationContext applicationContext;
 
     @Autowired
-    private ConfigPersisterImpl configPersister;
+    private BasicMachineEndpoint configPersister;
 
     private Map<Sid, BasicMachine> localStorage;
 

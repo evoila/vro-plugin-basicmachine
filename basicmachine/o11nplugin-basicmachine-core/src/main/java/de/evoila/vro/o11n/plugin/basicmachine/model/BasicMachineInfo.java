@@ -1,18 +1,12 @@
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
-import com.vmware.o11n.sdk.modeldriven.Findable;
 import com.vmware.o11n.sdk.modeldriven.Sid;
-import de.evoila.vro.o11n.plugin.basicmachine.config.ConfigPersisterImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Objects;
 
 public class BasicMachineInfo{
 
     public static final String TYPE = "BasicMachineInfo";
-
-    @Autowired
-    private ConfigPersisterImpl configPersister;
 
     private final Sid id;
 

@@ -5,7 +5,7 @@ import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
 
 import java.util.List;
 
-public interface ConfigPersister {
+public interface EndpointPersister {
 
     List<BasicMachineInfo> findAll();
 
@@ -15,7 +15,7 @@ public interface ConfigPersister {
 
     void delete(BasicMachineInfo basicMachineInfo);
 
-    void registerChangeListener(ConfigChangeListener configChangeListener);
+    void registerChangeListener(EndpointChangeListener endpointChangeListener);
 
     void reload();
 

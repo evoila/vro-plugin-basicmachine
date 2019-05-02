@@ -1,7 +1,7 @@
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
 import com.vmware.o11n.plugin.sdk.spring.platform.GlobalPluginNotificationHandler;
-import de.evoila.vro.o11n.plugin.basicmachine.config.ConfigPersisterImpl;
+import de.evoila.vro.o11n.plugin.basicmachine.config.BasicMachineEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class BasicMachineManager {
 
     @Autowired
-    private ConfigPersisterImpl configPersister;
+    private BasicMachineEndpoint configPersister;
     @Autowired
     private GlobalPluginNotificationHandler notificationHandler;
 
@@ -26,5 +26,6 @@ public class BasicMachineManager {
 
         return machineInfo.getId().toString();
     }
+
 
 }

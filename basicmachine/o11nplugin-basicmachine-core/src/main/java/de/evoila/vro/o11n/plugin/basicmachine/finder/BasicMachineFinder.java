@@ -4,8 +4,6 @@ import com.vmware.o11n.sdk.modeldriven.FoundObject;
 import com.vmware.o11n.sdk.modeldriven.ObjectFinder;
 import com.vmware.o11n.sdk.modeldriven.PluginContext;
 import com.vmware.o11n.sdk.modeldriven.Sid;
-import de.evoila.vro.o11n.plugin.basicmachine.config.ConfigPersister;
-import de.evoila.vro.o11n.plugin.basicmachine.config.ConfigPersisterImpl;
 import de.evoila.vro.o11n.plugin.basicmachine.config.LocalRepository;
 import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachine;
 import org.springframework.beans.factory.annotation.Autowired;

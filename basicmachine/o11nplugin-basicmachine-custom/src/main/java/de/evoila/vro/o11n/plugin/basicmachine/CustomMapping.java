@@ -11,7 +11,7 @@ public class CustomMapping extends AbstractMapping {
     @Override
     public void define() {
         singleton(BasicMachineManager.class);
-        wrap(BasicMachine.class).andFind().using(BasicMachineFinder.class).withIcon("default-16x16.png");
+        wrap(BasicMachine.class).andFind().using(BasicMachineFinder.class).withIcon("inventory.png");
         relateRoot().to(BasicMachine.class).using(BasicMachineRelater.class).as("basicmachines");
     }
 }

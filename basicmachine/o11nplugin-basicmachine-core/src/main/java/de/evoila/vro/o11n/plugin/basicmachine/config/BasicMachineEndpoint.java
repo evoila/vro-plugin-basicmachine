@@ -16,16 +16,16 @@ import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Component
-public class ConfigPersisterImpl implements ConfigPersister {
+public class BasicMachineEndpoint implements EndpointPersister {
 
-    private static final Logger LOG = LoggerFactory.getLogger(ConfigPersisterImpl.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BasicMachineEndpoint.class);
 
-    private final Collection<ConfigChangeListener> listeners;
+    private final Collection<EndpointChangeListener> listeners;
 
     @Autowired
     private IEndpointConfigurationService endpointConfigurationService;
 
-    public ConfigPersisterImpl() {
+    public BasicMachineEndpoint() {
         listeners = new CopyOnWriteArrayList<>();
     }
 
@@ -133,8 +133,8 @@ public class ConfigPersisterImpl implements ConfigPersister {
     }
 
     @Override
-    public void registerChangeListener(ConfigChangeListener configChangeListener) {
-        listeners.add(configChangeListener);
+    public void registerChangeListener(EndpointChangeListener endpointChangeListener) {
+        listeners.add(endpointChangeListener);
     }
 
     @Override
@@ -233,7 +233,7 @@ public class ConfigPersisterImpl implements ConfigPersister {
 
     private void notifyChangeListener(BasicMachineInfo machineInfo) {
 
-        for (ConfigChangeListener listener : listeners) {
+        for (EndpointChangeListener listener : listeners) {
             listener.basicMachineSaved(machineInfo);
         }
 

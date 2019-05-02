@@ -36,7 +36,9 @@
             <methods>
                 <method script-name="save" java-name="save" return-type="String">
                     <description></description>
-                    <parameters/>
+                    <parameters>
+                        <parameter type="String" name="name"></parameter>
+                    </parameters>
                 </method>
             </methods>
             <singleton script-name="BasicMachineBasicMachineManager" datasource="main-datasource"/>

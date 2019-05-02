@@ -2,7 +2,7 @@ package de.evoila.vro.o11n.plugin.basicmachine.config;
 
 import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
 
-public interface ConfigChangeListener {
+public interface EndpointChangeListener {
 
     void basicMachineSaved(BasicMachineInfo machineInfo);
 
