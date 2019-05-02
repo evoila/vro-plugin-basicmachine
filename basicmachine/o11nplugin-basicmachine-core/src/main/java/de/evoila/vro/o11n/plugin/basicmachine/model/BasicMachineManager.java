@@ -15,9 +15,10 @@ public class BasicMachineManager {
     @Autowired
     private GlobalPluginNotificationHandler notificationHandler;
 
-    public String save(){
+    public String save(String name){
 
         BasicMachineInfo machineInfo = new BasicMachineInfo();
+        machineInfo.setName(name);
 
         machineInfo = configPersister.save(machineInfo);
 

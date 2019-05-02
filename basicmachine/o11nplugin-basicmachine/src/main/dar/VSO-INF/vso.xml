@@ -29,6 +29,18 @@
         </finder>
     </finders>
     <scripting-objects>
+        <object script-name="_BasicMachineBasicMachineManager" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachineManager_Wrapper" create="false" is-deprecated="false">
+            <description></description>
+            <constructors/>
+            <attributes/>
+            <methods>
+                <method script-name="save" java-name="save" return-type="String">
+                    <description></description>
+                    <parameters/>
+                </method>
+            </methods>
+            <singleton script-name="BasicMachineBasicMachineManager" datasource="main-datasource"/>
+        </object>
         <object script-name="BasicMachineBasicMachine" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" create="true" is-deprecated="false">
             <description></description>
             <constructors/>
