@@ -175,7 +175,7 @@ public class BasicMachineInfo{
 
     @Override
     public String toString() {
-        return "BasicMachineInfo["
+        return "Summary["
                 + "id=" + id
                 + " name=" + name
                 + " ipAddress=" + ipAddress

@@ -1,5 +1,6 @@
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
+import com.google.common.base.Objects;
 import com.vmware.o11n.sdk.modeldriven.Findable;
 import com.vmware.o11n.sdk.modeldriven.Sid;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -35,5 +36,25 @@ public class BasicMachine implements Findable {
     @Override
     public void setInternalId(Sid sid) {
         // set via constructor
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BasicMachine that = (BasicMachine) o;
+        return Objects.equal(machineInfo, that.machineInfo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(machineInfo);
+    }
+
+    @Override
+    public String toString() {
+        return "BasicMachine{" +
+                "machineInfo=" + machineInfo +
+                '}';
     }
 }
