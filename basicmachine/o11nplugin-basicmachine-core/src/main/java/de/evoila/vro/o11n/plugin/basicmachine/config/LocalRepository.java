@@ -23,7 +23,7 @@ public class LocalRepository implements EndpointChangeListener, InitializingBean
     private ApplicationContext applicationContext;
 
     @Autowired
-    private BasicMachineEndpoint configPersister;
+    private BasicMachineEndpoint basicMachineEndpoint;
 
     private Map<Sid, BasicMachine> localStorage;
 
@@ -31,11 +31,11 @@ public class LocalRepository implements EndpointChangeListener, InitializingBean
         localStorage = new ConcurrentHashMap<>();
     }
 
-    public BasicMachine findById(Sid id){
+    public BasicMachine findById(Sid id) {
         return localStorage.get(id.getId());
     }
 
-    public Collection<BasicMachine> findAll(){
+    public Collection<BasicMachine> findAll() {
         return localStorage.values();
     }
 
@@ -57,10 +57,8 @@ public class LocalRepository implements EndpointChangeListener, InitializingBean
 
     @Override
     public void afterPropertiesSet() throws Exception {
-
-        configPersister.registerChangeListener(this);
-        configPersister.reload();
-
+        basicMachineEndpoint.registerChangeListener(this);
+        basicMachineEndpoint.reload();
     }
 
 }

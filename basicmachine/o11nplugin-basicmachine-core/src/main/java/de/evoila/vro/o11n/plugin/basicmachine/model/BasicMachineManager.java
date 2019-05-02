@@ -52,6 +52,24 @@ public class BasicMachineManager {
         return machineInfo.getId().toString();
     }
 
+
+    public BasicMachine getBaiscMachineById(String id) {
+
+        BasicMachine basicMachine = null;
+
+        Sid sid = Sid.valueOf(id);
+        BasicMachineInfo machineInfo = basicMachineEndpoint.findById(sid);
+
+        if (machineInfo != null)
+            basicMachine = new BasicMachine(machineInfo);
+
+        return basicMachine;
+    }
+
+    public BasicMachine[] getAllBasicMachines() {
+        return (BasicMachine[]) basicMachineEndpoint.findAll().toArray();
+    }
+
     public void delete(String id) {
 
         try {

@@ -9,7 +9,7 @@
         <finder-datasource name="main-datasource" adaptor-class="de.evoila.vro.o11n.plugin.basicmachine.BasicMachinePluginAdaptor" concurrent-call="false" anonymous-login-mode="internal"/>
     </finder-datasources>
     <finders>
-        <finder type="BasicMachine" datasource="main-datasource" image="images/inventory.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="nullBasicMachine">
+        <finder type="BasicMachine" datasource="main-datasource" image="images/inventory.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BmBasicMachine">
             <id accessor="getInternalId()"/>
             <description></description>
             <properties>
@@ -29,7 +29,7 @@
         </finder>
     </finders>
     <scripting-objects>
-        <object script-name="_nullBasicMachineManager" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachineManager_Wrapper" create="false" is-deprecated="false">
+        <object script-name="_BmBasicMachineManager" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachineManager_Wrapper" create="false" is-deprecated="false">
             <description></description>
             <constructors/>
             <attributes/>
@@ -59,9 +59,9 @@
                     </parameters>
                 </method>
             </methods>
-            <singleton script-name="nullBasicMachineManager" datasource="main-datasource"/>
+            <singleton script-name="BmBasicMachineManager" datasource="main-datasource"/>
         </object>
-        <object script-name="nullBasicMachine" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" create="true" is-deprecated="false">
+        <object script-name="BmBasicMachine" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" create="true" is-deprecated="false">
             <description></description>
             <constructors/>
             <attributes>
