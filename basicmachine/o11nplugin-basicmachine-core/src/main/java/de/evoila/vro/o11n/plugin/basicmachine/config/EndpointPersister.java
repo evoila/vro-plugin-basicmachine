@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
+ */
+
 package de.evoila.vro.o11n.plugin.basicmachine.config;
 
 import com.vmware.o11n.sdk.modeldriven.Sid;

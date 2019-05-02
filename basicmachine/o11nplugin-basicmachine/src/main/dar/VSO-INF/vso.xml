@@ -9,7 +9,7 @@
         <finder-datasource name="main-datasource" adaptor-class="de.evoila.vro.o11n.plugin.basicmachine.BasicMachinePluginAdaptor" concurrent-call="false" anonymous-login-mode="internal"/>
     </finder-datasources>
     <finders>
-        <finder type="BasicMachine" datasource="main-datasource" image="images/default-16x16.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BasicMachineBasicMachine">
+        <finder type="BasicMachine" datasource="main-datasource" image="images/inventory.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BasicMachineBasicMachine">
             <id accessor="getInternalId()"/>
             <description></description>
             <properties>
@@ -34,10 +34,28 @@
             <constructors/>
             <attributes/>
             <methods>
+                <method script-name="delete" java-name="delete" return-type="void">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="id"></parameter>
+                    </parameters>
+                </method>
                 <method script-name="save" java-name="save" return-type="String">
                     <description></description>
                     <parameters>
                         <parameter type="String" name="name"></parameter>
+                        <parameter type="String" name="ipAddress"></parameter>
+                        <parameter type="String" name="dnsName"></parameter>
+                        <parameter type="String" name="cpu"></parameter>
+                        <parameter type="String" name="memory"></parameter>
+                        <parameter type="String" name="operatingSystem"></parameter>
+                        <parameter type="String" name="diskSize"></parameter>
+                        <parameter type="String" name="powerState"></parameter>
+                        <parameter type="String" name="snapshot"></parameter>
+                        <parameter type="String" name="initialUsername"></parameter>
+                        <parameter type="String" name="initialPassword"></parameter>
+                        <parameter type="String" name="description"></parameter>
+                        <parameter type="String" name="json"></parameter>
                     </parameters>
                 </method>
             </methods>

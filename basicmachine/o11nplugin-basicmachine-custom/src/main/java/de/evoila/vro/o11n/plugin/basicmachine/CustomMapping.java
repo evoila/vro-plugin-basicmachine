@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
+ */
+
 package de.evoila.vro.o11n.plugin.basicmachine;
 
 import com.vmware.o11n.sdk.modeldrivengen.mapping.AbstractMapping;

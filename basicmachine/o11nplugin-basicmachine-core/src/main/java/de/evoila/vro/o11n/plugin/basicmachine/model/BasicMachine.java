@@ -1,3 +1,7 @@
+/*
+ * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
+ */
+
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
 import com.google.common.base.Objects;
