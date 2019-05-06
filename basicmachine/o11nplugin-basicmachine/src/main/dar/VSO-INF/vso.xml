@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<module name="BasicMachine" version="${project.version}" build-number="${build.number}" image="images/folder.png" display-name="BasicMachine">
-    <description>Basic Virtual Machine providing possibility to store a json string.</description>
+<module name="BasicMachine" version="${project.version}" build-number="" image="images/folder.png" display-name="BasicMachine">
+    <description>BasicMachine Plugin</description>
     <installation mode="${installation.mode}">
         <action resource="packages/de.evoila.vro.o11n.plugin.basicmachine" type="install-package"/>
     </installation>
@@ -9,11 +9,24 @@
         <finder-datasource name="main-datasource" adaptor-class="de.evoila.vro.o11n.plugin.basicmachine.BasicMachinePluginAdaptor" concurrent-call="false" anonymous-login-mode="internal"/>
     </finder-datasources>
     <finders>
-        <finder type="BasicMachine" datasource="main-datasource" image="images/inventory.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BmBasicMachine">
+        <finder type="BasicMachine" datasource="main-datasource" image="images/inventory.png" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" script-object="BasicMachine">
             <id accessor="getInternalId()"/>
             <description></description>
             <properties>
+                <property name="initialUsername" display-name="initialUsername" bean-property="initialUsername" show-in-column="true" show-in-description="true"></property>
+                <property name="description" display-name="description" bean-property="description" show-in-column="true" show-in-description="true"></property>
+                <property name="ipAddress" display-name="ipAddress" bean-property="ipAddress" show-in-column="true" show-in-description="true"></property>
                 <property name="displayName" display-name="displayName" bean-property="displayName" show-in-column="true" show-in-description="true"></property>
+                <property name="name" display-name="name" bean-property="name" show-in-column="true" show-in-description="true"></property>
+                <property name="dnsName" display-name="dnsName" bean-property="dnsName" show-in-column="true" show-in-description="true"></property>
+                <property name="memory" display-name="memory" bean-property="memory" show-in-column="true" show-in-description="true"></property>
+                <property name="json" display-name="json" bean-property="json" show-in-column="true" show-in-description="true"></property>
+                <property name="initialPassword" display-name="initialPassword" bean-property="initialPassword" show-in-column="true" show-in-description="true"></property>
+                <property name="powerState" display-name="powerState" bean-property="powerState" show-in-column="true" show-in-description="true"></property>
+                <property name="snapshot" display-name="snapshot" bean-property="snapshot" show-in-column="true" show-in-description="true"></property>
+                <property name="cpu" display-name="cpu" bean-property="cpu" show-in-column="true" show-in-description="true"></property>
+                <property name="operatingSystem" display-name="operatingSystem" bean-property="operatingSystem" show-in-column="true" show-in-description="true"></property>
+                <property name="diskSize" display-name="diskSize" bean-property="diskSize" show-in-column="true" show-in-description="true"></property>
             </properties>
             <inventory-children/>
             <relations/>
@@ -29,11 +42,17 @@
         </finder>
     </finders>
     <scripting-objects>
-        <object script-name="_BmBasicMachineManager" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachineManager_Wrapper" create="false" is-deprecated="false">
+        <object script-name="_BasicMachineManager" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachineManager_Wrapper" create="false" is-deprecated="false">
             <description></description>
             <constructors/>
             <attributes/>
             <methods>
+                <method script-name="getBasicMachineById" java-name="getBasicMachineById" return-type="BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="id"></parameter>
+                    </parameters>
+                </method>
                 <method script-name="delete" java-name="delete" return-type="void">
                     <description></description>
                     <parameters>
@@ -59,13 +78,26 @@
                     </parameters>
                 </method>
             </methods>
-            <singleton script-name="BmBasicMachineManager" datasource="main-datasource"/>
+            <singleton script-name="BasicMachineManager" datasource="main-datasource"/>
         </object>
-        <object script-name="BmBasicMachine" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" create="true" is-deprecated="false">
+        <object script-name="BasicMachine" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachine_Wrapper" create="true" is-deprecated="false">
             <description></description>
             <constructors/>
             <attributes>
+                <attribute script-name="memory" java-name="memory" return-type="String" read-only="false"></attribute>
                 <attribute script-name="displayName" java-name="displayName" return-type="String" read-only="true"></attribute>
+                <attribute script-name="ipAddress" java-name="ipAddress" return-type="String" read-only="false"></attribute>
+                <attribute script-name="description" java-name="description" return-type="String" read-only="false"></attribute>
+                <attribute script-name="dnsName" java-name="dnsName" return-type="String" read-only="false"></attribute>
+                <attribute script-name="cpu" java-name="cpu" return-type="String" read-only="false"></attribute>
+                <attribute script-name="operatingSystem" java-name="operatingSystem" return-type="String" read-only="false"></attribute>
+                <attribute script-name="initialUsername" java-name="initialUsername" return-type="String" read-only="false"></attribute>
+                <attribute script-name="diskSize" java-name="diskSize" return-type="String" read-only="false"></attribute>
+                <attribute script-name="powerState" java-name="powerState" return-type="String" read-only="false"></attribute>
+                <attribute script-name="initialPassword" java-name="initialPassword" return-type="String" read-only="false"></attribute>
+                <attribute script-name="name" java-name="name" return-type="String" read-only="false"></attribute>
+                <attribute script-name="json" java-name="json" return-type="String" read-only="false"></attribute>
+                <attribute script-name="snapshot" java-name="snapshot" return-type="String" read-only="false"></attribute>
             </attributes>
             <methods/>
         </object>

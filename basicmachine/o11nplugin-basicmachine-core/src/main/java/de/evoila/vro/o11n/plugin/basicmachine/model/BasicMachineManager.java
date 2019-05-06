@@ -4,14 +4,20 @@
 
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
+import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
 import com.vmware.o11n.plugin.sdk.spring.platform.GlobalPluginNotificationHandler;
 import com.vmware.o11n.sdk.modeldriven.Sid;
 import de.evoila.vro.o11n.plugin.basicmachine.config.BasicMachineEndpoint;
+import de.evoila.vro.o11n.plugin.basicmachine.config.LocalRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 @Scope(value = "prototype")
@@ -21,6 +27,8 @@ public class BasicMachineManager {
 
     @Autowired
     private BasicMachineEndpoint basicMachineEndpoint;
+    @Autowired
+    private LocalRepository localRepository;
     @Autowired
     private GlobalPluginNotificationHandler notificationHandler;
 
@@ -52,32 +60,21 @@ public class BasicMachineManager {
         return machineInfo.getId().toString();
     }
 
-
-    public BasicMachine getBaiscMachineById(String id) {
-
-        BasicMachine basicMachine = null;
+    public BasicMachine getBasicMachineById(String id) {
 
         Sid sid = Sid.valueOf(id);
-        BasicMachineInfo machineInfo = basicMachineEndpoint.findById(sid);
-
-        if (machineInfo != null)
-            basicMachine = new BasicMachine(machineInfo);
+        BasicMachine basicMachine = localRepository.findById(sid);
 
         return basicMachine;
-    }
-
-    public BasicMachine[] getAllBasicMachines() {
-        return (BasicMachine[]) basicMachineEndpoint.findAll().toArray();
     }
 
     public void delete(String id) {
 
         try {
             Sid sid = Sid.valueOf(id);
-            BasicMachineInfo machineInfo = basicMachineEndpoint.findById(sid);
+            BasicMachine basicMachine = localRepository.findById(sid);
 
-            if (machineInfo != null)
-                basicMachineEndpoint.delete(machineInfo);
+            basicMachineEndpoint.delete(basicMachine.getMachineInfo());
 
         } catch (IllegalArgumentException e) {
             LOG.error("Failed to delete BasicMachine with id:" + id);

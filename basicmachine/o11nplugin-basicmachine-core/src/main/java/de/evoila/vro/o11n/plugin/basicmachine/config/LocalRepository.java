@@ -25,34 +25,43 @@ public class LocalRepository implements EndpointChangeListener, InitializingBean
     @Autowired
     private BasicMachineEndpoint basicMachineEndpoint;
 
-    private Map<Sid, BasicMachine> localStorage;
+    private Map<Sid, BasicMachine> basicmachines;
 
     public LocalRepository() {
-        localStorage = new ConcurrentHashMap<>();
+        basicmachines = new ConcurrentHashMap<>();
     }
 
     public BasicMachine findById(Sid id) {
-        return localStorage.get(id.getId());
+        return basicmachines.get(id.getId());
     }
 
     public Collection<BasicMachine> findAll() {
-        return localStorage.values();
+        return basicmachines.values();
     }
 
     @Override
     public void basicMachineSaved(BasicMachineInfo machineInfo) {
         BasicMachine newMachine = (BasicMachine) applicationContext.getBean("basicMachine", machineInfo);
-        localStorage.put(machineInfo.getId(), newMachine);
+        basicmachines.put(machineInfo.getId(), newMachine);
     }
 
     @Override
     public void basicMachineUpdated(BasicMachineInfo machineInfo) {
-        throw new UnsupportedOperationException("basicMachineUpdated(BasicMachine basicMachine) is not implemented yet!");
+
+        BasicMachine basicMachine = basicmachines.get(machineInfo.getId());
+
+        if(basicMachine != null){
+            basicMachine.update(machineInfo);
+        } else{
+            basicMachine = (BasicMachine) applicationContext.getBean("basicMachine", machineInfo);
+            basicmachines.put(machineInfo.getId(), basicMachine);
+        }
+
     }
 
     @Override
     public void basicMachineDeleted(BasicMachineInfo machineInfo) {
-        localStorage.remove(machineInfo.getId());
+        basicmachines.remove(machineInfo.getId());
     }
 
     @Override

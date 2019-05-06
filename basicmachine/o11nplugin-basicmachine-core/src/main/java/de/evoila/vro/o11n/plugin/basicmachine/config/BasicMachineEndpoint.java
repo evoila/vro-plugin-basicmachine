@@ -7,6 +7,7 @@ package de.evoila.vro.o11n.plugin.basicmachine.config;
 import ch.dunes.vso.sdk.endpoints.IEndpointConfiguration;
 import ch.dunes.vso.sdk.endpoints.IEndpointConfigurationService;
 import com.vmware.o11n.sdk.modeldriven.Sid;
+import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachine;
 import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -96,8 +97,8 @@ public class BasicMachineEndpoint implements EndpointPersister {
             throw new RuntimeException("BasicMachine is invalid.");
         }
 
-        if (basicMachineAlreadyExists(machineInfo))
-            throw new RuntimeException("BasicMachine with same name already exists: " + machineInfo + "\n");
+        if (basicMachineInfoAlreadyExists(machineInfo))
+            throw new RuntimeException("BasicMachine with same id already exists: " + machineInfo + "\n");
 
         try {
 
@@ -125,6 +126,21 @@ public class BasicMachineEndpoint implements EndpointPersister {
     }
 
     @Override
+    public BasicMachine update(BasicMachineInfo machineInfo) {
+
+        if(!basicMachineInfoAlreadyExists(machineInfo)){
+            LOG.error("Error while updating endpoint configuration for BasicMachine: " + machineInfo);
+            throw new RuntimeException("Can not update BasicMachine. BasicMachine does not exist.");
+        }
+
+
+
+        notifyChangeListenerOnUpdate(machineInfo);
+
+        return null;
+    }
+
+    @Override
     public void delete(BasicMachineInfo machineInfo) {
 
         try {
@@ -148,23 +164,27 @@ public class BasicMachineEndpoint implements EndpointPersister {
         Collection<BasicMachineInfo> result = findAll();
 
         for (BasicMachineInfo machineInfo : result) {
-            notifyChangeListenerOnSave(machineInfo);
+            notifyChangeListenerOnUpdate(machineInfo);
         }
 
     }
 
-    private boolean basicMachineAlreadyExists(BasicMachineInfo machineInfo) {
+    private boolean basicMachineInfoAlreadyExists(BasicMachineInfo machineInfo) {
 
-        BasicMachineInfo result = findBasicMachineByName(machineInfo.getName());
+        if (machineInfo.getId() == null)
+            throw new RuntimeException("Id can not be null!");
 
-        if (result != null && !((result.getId().toString()).equals(machineInfo.getId().toString()))) {
-            return true;
+        Collection<BasicMachineInfo> result = findAll();
+
+        for (BasicMachineInfo bmi : result) {
+            if (machineInfo.getId().equals(bmi.getId()))
+                return true;
         }
 
         return false;
     }
 
-    private BasicMachineInfo findBasicMachineByName(String name) {
+    private BasicMachineInfo findBasicMachineInfoByName(String name) {
 
         if (name == null)
             throw new RuntimeException("Name can not be null!");
@@ -232,6 +252,14 @@ public class BasicMachineEndpoint implements EndpointPersister {
         } catch (IllegalArgumentException e) {
             LOG.error("Can not convert IEndpointConfiguration[" + iEndpointConfiguration.getId() + "] to Type BasicMachine!", e);
             throw new RuntimeException(e);
+        }
+
+    }
+
+    private void notifyChangeListenerOnUpdate(BasicMachineInfo machineInfo) {
+
+        for (EndpointChangeListener listener : listeners) {
+            listener.basicMachineUpdated(machineInfo);
         }
 
     }
