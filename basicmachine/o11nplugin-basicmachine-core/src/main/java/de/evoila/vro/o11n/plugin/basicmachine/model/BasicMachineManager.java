@@ -32,7 +32,7 @@ public class BasicMachineManager {
     @Autowired
     public ObjectFactory objectFactory;
 
-    public String save(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
+    public String saveBasicMachine(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
 
         BasicMachineInfo machineInfo = new BasicMachineInfo();
         machineInfo.setName(name);
@@ -68,7 +68,7 @@ public class BasicMachineManager {
         return convertToFoundObject(sid, BasicMachine.class, basicMachine);
     }
 
-    public void delete(String id) {
+    public void deleteBasicMachine(String id) {
 
         try {
             Sid sid = Sid.valueOf(id);
