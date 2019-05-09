@@ -32,7 +32,7 @@ public class LocalRepository implements EndpointChangeListener, InitializingBean
     }
 
     public BasicMachine findById(Sid id) {
-        return basicmachines.get(id.getId());
+        return basicmachines.get(id);
     }
 
     public Collection<BasicMachine> findAll() {

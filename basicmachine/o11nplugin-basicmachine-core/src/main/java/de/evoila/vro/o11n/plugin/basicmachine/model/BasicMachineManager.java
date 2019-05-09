@@ -6,6 +6,8 @@ package de.evoila.vro.o11n.plugin.basicmachine.model;
 
 import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
 import com.vmware.o11n.plugin.sdk.spring.platform.GlobalPluginNotificationHandler;
+import com.vmware.o11n.sdk.modeldriven.FoundObject;
+import com.vmware.o11n.sdk.modeldriven.ObjectFactory;
 import com.vmware.o11n.sdk.modeldriven.Sid;
 import de.evoila.vro.o11n.plugin.basicmachine.config.BasicMachineEndpoint;
 import de.evoila.vro.o11n.plugin.basicmachine.config.LocalRepository;
@@ -15,9 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Component
 @Scope(value = "prototype")
@@ -31,6 +30,8 @@ public class BasicMachineManager {
     private LocalRepository localRepository;
     @Autowired
     private GlobalPluginNotificationHandler notificationHandler;
+    @Autowired
+    public ObjectFactory objectFactory;
 
     public String save(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
 
@@ -60,12 +61,20 @@ public class BasicMachineManager {
         return machineInfo.getId().toString();
     }
 
-    public BasicMachine getBasicMachineById(String id) {
+    public FoundObject<BasicMachine> convertToFoundObject(Sid rootId, Class<BasicMachine> desiredType, BasicMachine mo) {
+
+        Sid id = objectFactory.assignId(desiredType, mo, rootId);
+
+        return new FoundObject(mo, id);
+
+    }
+
+    public FoundObject<BasicMachine> getBasicMachineById(String id) {
 
         Sid sid = Sid.valueOf(id);
         BasicMachine basicMachine = localRepository.findById(sid);
 
-        return basicMachine;
+        return convertToFoundObject(sid, BasicMachine.class, basicMachine);
     }
 
     public void delete(String id) {

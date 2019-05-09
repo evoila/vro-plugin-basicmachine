@@ -39,7 +39,7 @@ public class BasicMachine implements Findable {
 
     @Override
     public Sid getInternalId() {
-        return Sid.valueOf(getMachineInfo().getId().toString());
+        return machineInfo.getId();
     }
 
     @Override
@@ -200,5 +200,7 @@ public class BasicMachine implements Findable {
     public String getDisplayName() {
         return getMachineInfo().getName() + "[" + getMachineInfo().getIpAddress() + "]";
     }
+
+
 
 }
