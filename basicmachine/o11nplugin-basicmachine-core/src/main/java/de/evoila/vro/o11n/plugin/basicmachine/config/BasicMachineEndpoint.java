@@ -19,6 +19,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+
+/**
+ *
+ */
 @Component
 public class BasicMachineEndpoint implements EndpointPersister {
 
@@ -33,6 +37,11 @@ public class BasicMachineEndpoint implements EndpointPersister {
         listeners = new CopyOnWriteArrayList<>();
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @return list of all {@link BasicMachineInfo} that was found
+     */
     @Override
     public List<BasicMachineInfo> findAll() {
 
@@ -64,6 +73,13 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param id of the endpoint configuration
+     * @return {@link BasicMachineInfo} or null
+     * @throws RuntimeException if id is null or no endpoint configuration with the given id was found.
+     */
     @Override
     public BasicMachineInfo findById(Sid id) {
 
@@ -88,85 +104,112 @@ public class BasicMachineEndpoint implements EndpointPersister {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param basicMachineInfo which should be stored in the endpoint
+     * @return the current saved {@link BasicMachineInfo}
+     * @throws RuntimeException if given basicMachineInfo or the containing ID is null
+     * @throws RuntimeException if {@link BasicMachineInfo} already exists on the endpoint
+     */
     @Override
-    public BasicMachineInfo save(BasicMachineInfo machineInfo) {
+    public BasicMachineInfo save(BasicMachineInfo basicMachineInfo) {
 
-        if (machineInfo == null || machineInfo.getId() == null) {
+        if (basicMachineInfo == null || basicMachineInfo.getId() == null) {
             LOG.error("Can not save BasicMachine. Is null or id is missing!");
             throw new RuntimeException("BasicMachine is invalid.");
         }
 
-        if (basicMachineInfoAlreadyExists(machineInfo))
-            throw new RuntimeException("BasicMachine with same id already exists: " + machineInfo + "\n");
+        if (basicMachineInfoAlreadyExists(basicMachineInfo))
+            throw new RuntimeException("BasicMachine with same id already exists: " + basicMachineInfo + "\n");
 
         try {
 
-            IEndpointConfiguration endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(machineInfo.getId().toString());
+            IEndpointConfiguration endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(basicMachineInfo.getId().toString());
 
             if (endpointConfiguration == null) {
 
-                endpointConfiguration = endpointConfigurationService.newEndpointConfiguration(machineInfo.getId().toString());
+                endpointConfiguration = endpointConfigurationService.newEndpointConfiguration(basicMachineInfo.getId().toString());
 
             }
 
-            convertToIEndpointConfiguration(endpointConfiguration, machineInfo);
+            convertToIEndpointConfiguration(endpointConfiguration, basicMachineInfo);
 
             endpointConfigurationService.saveEndpointConfiguration(endpointConfiguration);
 
-            notifyChangeListenerOnSave(machineInfo);
+            notifyChangeListenerOnSave(basicMachineInfo);
 
-            return machineInfo;
+            return basicMachineInfo;
 
         } catch (IOException e) {
-            LOG.error("Error saving BasicMachine: " + machineInfo, e);
+            LOG.error("Error saving BasicMachine: " + basicMachineInfo, e);
             throw new RuntimeException(e);
         }
 
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param basicMachineInfo which should be updated
+     * @return {@link BasicMachineInfo} which was currently updated
+     */
     @Override
-    public BasicMachineInfo update(BasicMachineInfo machineInfo) {
+    public BasicMachineInfo update(BasicMachineInfo basicMachineInfo) {
 
         try {
-            IEndpointConfiguration endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(machineInfo.getId().toString());
+            IEndpointConfiguration endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(basicMachineInfo.getId().toString());
 
             if (endpointConfiguration == null) {
-                LOG.error("Error while updating endpoint configuration for BasicMachine: " + machineInfo);
+                LOG.error("Error while updating endpoint configuration for BasicMachine: " + basicMachineInfo);
                 throw new RuntimeException("Can not update BasicMachine. BasicMachine does not exist.");
             }
 
-            convertToIEndpointConfiguration(endpointConfiguration, machineInfo);
+            convertToIEndpointConfiguration(endpointConfiguration, basicMachineInfo);
 
             endpointConfigurationService.saveEndpointConfiguration(endpointConfiguration);
 
         } catch (IOException e) {
-            LOG.error("Error updating BasicMachine: " + machineInfo, e);
+            LOG.error("Error updating BasicMachine: " + basicMachineInfo, e);
             throw new RuntimeException(e);
         }
 
-        notifyChangeListenerOnUpdate(machineInfo);
+        notifyChangeListenerOnUpdate(basicMachineInfo);
 
-        return machineInfo;
+        return basicMachineInfo;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param basicMachineInfo which should be deleted
+     */
     @Override
-    public void delete(BasicMachineInfo machineInfo) {
+    public void delete(BasicMachineInfo basicMachineInfo) {
 
         try {
-            endpointConfigurationService.deleteEndpointConfiguration(machineInfo.getId().toString());
-            notifyChangeListenerOnDelete(machineInfo);
+            endpointConfigurationService.deleteEndpointConfiguration(basicMachineInfo.getId().toString());
+            notifyChangeListenerOnDelete(basicMachineInfo);
         } catch (IOException e) {
-            LOG.error("Error while deleting endpoint configuration for BasicMachine: " + machineInfo);
+            LOG.error("Error while deleting endpoint configuration for BasicMachine: " + basicMachineInfo);
             throw new RuntimeException(e);
         }
 
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param endpointChangeListener which should listen on this endpoint configuration
+     */
     @Override
     public void registerChangeListener(EndpointChangeListener endpointChangeListener) {
         listeners.add(endpointChangeListener);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void reload() {
 
@@ -178,21 +221,35 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
     }
 
-    private boolean basicMachineInfoAlreadyExists(BasicMachineInfo machineInfo) {
+    /**
+     * Checks if a endpoint configuration for this {@link BasicMachineInfo} already exists by using its ID.
+     *
+     * @param basicMachineInfo to be checked
+     * @return true if endpoint configuration already exists false otherwise
+     */
+    private boolean basicMachineInfoAlreadyExists(BasicMachineInfo basicMachineInfo) {
 
-        if (machineInfo.getId() == null)
+        if (basicMachineInfo.getId() == null)
             throw new RuntimeException("Id can not be null!");
 
         Collection<BasicMachineInfo> result = findAll();
 
         for (BasicMachineInfo bmi : result) {
-            if (machineInfo.getId().equals(bmi.getId()))
+            if (basicMachineInfo.getId().equals(bmi.getId()))
                 return true;
         }
 
         return false;
     }
 
+    /**
+     * Finds a {@link BasicMachineInfo} configuration/resource by its name.
+     *
+     * @param name of the {@link BasicMachineInfo}
+     * @return the found {@link BasicMachineInfo} or null
+     * @throws RuntimeException if given name is null
+     */
+    @Deprecated
     private BasicMachineInfo findBasicMachineInfoByName(String name) {
 
         if (name == null)
@@ -208,24 +265,31 @@ public class BasicMachineEndpoint implements EndpointPersister {
         return null;
     }
 
-    private void convertToIEndpointConfiguration(IEndpointConfiguration endpointConfiguration, BasicMachineInfo machineInfo) {
+    /**
+     * Copies the content of the type {@link BasicMachineInfo} into the type {@link IEndpointConfiguration}.
+     *
+     * @param endpointConfiguration existing {@link IEndpointConfiguration} not null
+     * @param basicMachineInfo      existing {@link BasicMachineInfo} not null
+     * @throws Exception
+     */
+    private void convertToIEndpointConfiguration(IEndpointConfiguration endpointConfiguration, BasicMachineInfo basicMachineInfo) {
 
         try {
 
-            endpointConfiguration.setString("id", machineInfo.getId().toString());
-            endpointConfiguration.setString("name", machineInfo.getName());
-            endpointConfiguration.setString("ipAddress", machineInfo.getIpAddress());
-            endpointConfiguration.setString("dnsName", machineInfo.getDnsName());
-            endpointConfiguration.setString("cpu", machineInfo.getCpu());
-            endpointConfiguration.setString("memory", machineInfo.getMemory());
-            endpointConfiguration.setString("operatingSystem", machineInfo.getOperatingSystem());
-            endpointConfiguration.setString("diskSize", machineInfo.getDiskSize());
-            endpointConfiguration.setString("powerState", machineInfo.getPowerState());
-            endpointConfiguration.setString("snapshot", machineInfo.getSnapshot());
-            endpointConfiguration.setString("initialUsername", machineInfo.getInitialUsername());
-            endpointConfiguration.setString("initialPassword", machineInfo.getInitialPassword());
-            endpointConfiguration.setString("description", machineInfo.getDescription());
-            endpointConfiguration.setString("json", machineInfo.getJson());
+            endpointConfiguration.setString("id", basicMachineInfo.getId().toString());
+            endpointConfiguration.setString("name", basicMachineInfo.getName());
+            endpointConfiguration.setString("ipAddress", basicMachineInfo.getIpAddress());
+            endpointConfiguration.setString("dnsName", basicMachineInfo.getDnsName());
+            endpointConfiguration.setString("cpu", basicMachineInfo.getCpu());
+            endpointConfiguration.setString("memory", basicMachineInfo.getMemory());
+            endpointConfiguration.setString("operatingSystem", basicMachineInfo.getOperatingSystem());
+            endpointConfiguration.setString("diskSize", basicMachineInfo.getDiskSize());
+            endpointConfiguration.setString("powerState", basicMachineInfo.getPowerState());
+            endpointConfiguration.setString("snapshot", basicMachineInfo.getSnapshot());
+            endpointConfiguration.setString("initialUsername", basicMachineInfo.getInitialUsername());
+            endpointConfiguration.setString("initialPassword", basicMachineInfo.getInitialPassword());
+            endpointConfiguration.setString("description", basicMachineInfo.getDescription());
+            endpointConfiguration.setString("json", basicMachineInfo.getJson());
 
         } catch (Exception e) {
             LOG.error("Can not convert BasicMachine to IEndpointConfiguration!", e);
@@ -234,29 +298,36 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
     }
 
+    /**
+     * Creates a new {@link BasicMachineInfo} and copies the content of the given {@link IEndpointConfiguration} into it.
+     *
+     * @param iEndpointConfiguration which content should be copied
+     * @return the created {@link BasicMachineInfo} with the content of the iEndpointConfiguration
+     * @throws Exception
+     */
     private BasicMachineInfo convertToBasicMachineInfo(IEndpointConfiguration iEndpointConfiguration) {
 
         try {
 
             Sid sid = Sid.valueOf(iEndpointConfiguration.getString("id"));
 
-            BasicMachineInfo machineInfo = new BasicMachineInfo(sid);
+            BasicMachineInfo basicMachineInfo = new BasicMachineInfo(sid);
 
-            machineInfo.setName(iEndpointConfiguration.getString("name"));
-            machineInfo.setIpAddress(iEndpointConfiguration.getString("ipAddress"));
-            machineInfo.setDnsName(iEndpointConfiguration.getString("dnsName"));
-            machineInfo.setCpu(iEndpointConfiguration.getString("cpu"));
-            machineInfo.setMemory(iEndpointConfiguration.getString("memory"));
-            machineInfo.setOperatingSystem(iEndpointConfiguration.getString("operatingSystem"));
-            machineInfo.setDiskSize(iEndpointConfiguration.getString("diskSize"));
-            machineInfo.setPowerState(iEndpointConfiguration.getString("powerState"));
-            machineInfo.setSnapshot(iEndpointConfiguration.getString("snapshot"));
-            machineInfo.setInitialUsername(iEndpointConfiguration.getString("initialUsername"));
-            machineInfo.setInitialPassword(iEndpointConfiguration.getString("initialPassword"));
-            machineInfo.setDescription(iEndpointConfiguration.getString("description"));
-            machineInfo.setJson(iEndpointConfiguration.getString("json"));
+            basicMachineInfo.setName(iEndpointConfiguration.getString("name"));
+            basicMachineInfo.setIpAddress(iEndpointConfiguration.getString("ipAddress"));
+            basicMachineInfo.setDnsName(iEndpointConfiguration.getString("dnsName"));
+            basicMachineInfo.setCpu(iEndpointConfiguration.getString("cpu"));
+            basicMachineInfo.setMemory(iEndpointConfiguration.getString("memory"));
+            basicMachineInfo.setOperatingSystem(iEndpointConfiguration.getString("operatingSystem"));
+            basicMachineInfo.setDiskSize(iEndpointConfiguration.getString("diskSize"));
+            basicMachineInfo.setPowerState(iEndpointConfiguration.getString("powerState"));
+            basicMachineInfo.setSnapshot(iEndpointConfiguration.getString("snapshot"));
+            basicMachineInfo.setInitialUsername(iEndpointConfiguration.getString("initialUsername"));
+            basicMachineInfo.setInitialPassword(iEndpointConfiguration.getString("initialPassword"));
+            basicMachineInfo.setDescription(iEndpointConfiguration.getString("description"));
+            basicMachineInfo.setJson(iEndpointConfiguration.getString("json"));
 
-            return machineInfo;
+            return basicMachineInfo;
 
         } catch (IllegalArgumentException e) {
             LOG.error("Can not convert IEndpointConfiguration[" + iEndpointConfiguration.getId() + "] to Type BasicMachine!", e);
@@ -265,26 +336,41 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
     }
 
-    private void notifyChangeListenerOnUpdate(BasicMachineInfo machineInfo) {
+    /**
+     * Notifies all subscriber of this endpoint configuration that a configuration/resource was updated.
+     *
+     * @param basicMachineInfo which was updated
+     */
+    private void notifyChangeListenerOnUpdate(BasicMachineInfo basicMachineInfo) {
 
         for (EndpointChangeListener listener : listeners) {
-            listener.basicMachineUpdated(machineInfo);
+            listener.basicMachineUpdated(basicMachineInfo);
         }
 
     }
 
-    private void notifyChangeListenerOnSave(BasicMachineInfo machineInfo) {
+    /**
+     * Notifies all subscriber of this endpoint configuration that a configuration/resource was saved.
+     *
+     * @param basicMachineInfo which was saved
+     */
+    private void notifyChangeListenerOnSave(BasicMachineInfo basicMachineInfo) {
 
         for (EndpointChangeListener listener : listeners) {
-            listener.basicMachineSaved(machineInfo);
+            listener.basicMachineSaved(basicMachineInfo);
         }
 
     }
 
-    private void notifyChangeListenerOnDelete(BasicMachineInfo machineInfo) {
+    /**
+     * Notifies all subscriber of this endpoint configuration that a configuration/resource was deleted.
+     *
+     * @param basicMachineInfo which was deleted
+     */
+    private void notifyChangeListenerOnDelete(BasicMachineInfo basicMachineInfo) {
 
         for (EndpointChangeListener listener : listeners) {
-            listener.basicMachineDeleted(machineInfo);
+            listener.basicMachineDeleted(basicMachineInfo);
         }
 
     }

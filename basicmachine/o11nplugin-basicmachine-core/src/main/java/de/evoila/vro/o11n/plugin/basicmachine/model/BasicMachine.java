@@ -198,7 +198,7 @@ public class BasicMachine implements Findable {
     }
 
     public String getDisplayName() {
-        return getMachineInfo().getName() + "[" + getMachineInfo().getIpAddress() + "]";
+        return getMachineInfo().getName() + " [" + getMachineInfo().getIpAddress() + "]";
     }
 
 

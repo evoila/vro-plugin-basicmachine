@@ -4,7 +4,6 @@
 
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
-import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
 import com.vmware.o11n.plugin.sdk.spring.platform.GlobalPluginNotificationHandler;
 import com.vmware.o11n.sdk.modeldriven.FoundObject;
 import com.vmware.o11n.sdk.modeldriven.ObjectFactory;
@@ -61,14 +60,6 @@ public class BasicMachineManager {
         return machineInfo.getId().toString();
     }
 
-    public FoundObject<BasicMachine> convertToFoundObject(Sid rootId, Class<BasicMachine> desiredType, BasicMachine mo) {
-
-        Sid id = objectFactory.assignId(desiredType, mo, rootId);
-
-        return new FoundObject(mo, id);
-
-    }
-
     public FoundObject<BasicMachine> getBasicMachineById(String id) {
 
         Sid sid = Sid.valueOf(id);
@@ -89,6 +80,14 @@ public class BasicMachineManager {
             LOG.error("Failed to delete BasicMachine with id:" + id);
             throw new RuntimeException(e);
         }
+
+    }
+
+    private FoundObject<BasicMachine> convertToFoundObject(Sid rootId, Class<BasicMachine> desiredType, BasicMachine modelType) {
+
+        Sid id = objectFactory.assignId(desiredType, modelType, rootId);
+
+        return new FoundObject(modelType, id);
 
     }
 
