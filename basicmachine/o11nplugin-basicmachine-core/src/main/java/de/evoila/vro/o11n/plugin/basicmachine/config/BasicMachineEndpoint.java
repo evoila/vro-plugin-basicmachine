@@ -128,12 +128,22 @@ public class BasicMachineEndpoint implements EndpointPersister {
     @Override
     public BasicMachine update(BasicMachineInfo machineInfo) {
 
-        if(!basicMachineInfoAlreadyExists(machineInfo)){
-            LOG.error("Error while updating endpoint configuration for BasicMachine: " + machineInfo);
-            throw new RuntimeException("Can not update BasicMachine. BasicMachine does not exist.");
+        try {
+            IEndpointConfiguration endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(machineInfo.getId().toString());
+
+            if (endpointConfiguration == null) {
+                LOG.error("Error while updating endpoint configuration for BasicMachine: " + machineInfo);
+                throw new RuntimeException("Can not update BasicMachine. BasicMachine does not exist.");
+            }
+
+            convertToIEndpointConfiguration(endpointConfiguration, machineInfo);
+
+            endpointConfigurationService.saveEndpointConfiguration(endpointConfiguration);
+
+        } catch (IOException e) {
+            LOG.error("Error updating BasicMachine: " + machineInfo, e);
+            throw new RuntimeException(e);
         }
-
-
 
         notifyChangeListenerOnUpdate(machineInfo);
 
