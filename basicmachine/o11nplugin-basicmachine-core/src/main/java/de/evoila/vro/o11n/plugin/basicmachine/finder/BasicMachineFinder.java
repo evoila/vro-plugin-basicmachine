@@ -16,16 +16,35 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ */
 public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
 
     @Autowired
     private LocalRepository localRepository;
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param pluginContext
+     * @param s
+     * @param sid
+     * @return
+     */
     @Override
     public BasicMachine find(PluginContext pluginContext, String s, Sid sid) {
         return localRepository.findById(sid);
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param pluginContext
+     * @param s
+     * @param query
+     * @return
+     */
     @Override
     public List<FoundObject<BasicMachine>> query(PluginContext pluginContext, String s, String query) {
 
@@ -44,6 +63,13 @@ public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
         return result;
     }
 
+    /**
+     * {@inheritDoc}
+     *
+     * @param basicMachine
+     * @param sid
+     * @return
+     */
     @Override
     public Sid assignId(BasicMachine basicMachine, Sid sid) {
         return basicMachine.getInternalId();

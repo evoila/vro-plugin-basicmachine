@@ -25,9 +25,10 @@ public class CustomModule extends AbstractModule {
     public CustomModule() {
         this.plugin = new Plugin();
 
-        plugin.setApiPrefix("Bm");
+        plugin.setApiPrefix("");
         plugin.setIcon("folder.png");
-        plugin.setDescription("Basic Virtual Machine providing possibility to store a json string.");
+        plugin.setDescription("BasicMachine Plugin");
+        plugin.setBuild("");
         plugin.setDisplayName("BasicMachine");
         plugin.setName("BasicMachine");
         plugin.setPackages(Collections.singletonList("de.evoila.vro.o11n.plugin.basicmachine"));

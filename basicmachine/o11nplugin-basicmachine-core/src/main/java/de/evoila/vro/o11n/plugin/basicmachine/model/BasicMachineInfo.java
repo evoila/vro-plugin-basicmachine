@@ -7,6 +7,7 @@ package de.evoila.vro.o11n.plugin.basicmachine.model;
 import com.vmware.o11n.sdk.modeldriven.Sid;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class BasicMachineInfo{
 
@@ -35,12 +36,12 @@ public class BasicMachineInfo{
 
     public BasicMachineInfo() {
         super();
-        id = Sid.unique();
+        id = Sid.valueOf(UUID.randomUUID().toString());
     }
 
     public BasicMachineInfo(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
         super();
-        id = Sid.unique();
+        id = Sid.valueOf(UUID.randomUUID().toString());
         this.name = name;
         this.ipAddress = ipAddress;
         this.dnsName = dnsName;
