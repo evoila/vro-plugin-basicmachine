@@ -20,7 +20,7 @@ public interface EndpointPersister {
 
     void delete(BasicMachineInfo basicMachineInfo);
 
-    BasicMachine update(BasicMachineInfo basicMachineInfo);
+    BasicMachineInfo update(BasicMachineInfo basicMachineInfo);
 
     void registerChangeListener(EndpointChangeListener endpointChangeListener);
 

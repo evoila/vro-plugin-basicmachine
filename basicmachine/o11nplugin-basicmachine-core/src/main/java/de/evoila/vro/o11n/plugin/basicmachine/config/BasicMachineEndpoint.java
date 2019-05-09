@@ -7,7 +7,6 @@ package de.evoila.vro.o11n.plugin.basicmachine.config;
 import ch.dunes.vso.sdk.endpoints.IEndpointConfiguration;
 import ch.dunes.vso.sdk.endpoints.IEndpointConfigurationService;
 import com.vmware.o11n.sdk.modeldriven.Sid;
-import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachine;
 import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -126,7 +125,7 @@ public class BasicMachineEndpoint implements EndpointPersister {
     }
 
     @Override
-    public BasicMachine update(BasicMachineInfo machineInfo) {
+    public BasicMachineInfo update(BasicMachineInfo machineInfo) {
 
         try {
             IEndpointConfiguration endpointConfiguration = endpointConfigurationService.getEndpointConfiguration(machineInfo.getId().toString());
@@ -147,7 +146,7 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
         notifyChangeListenerOnUpdate(machineInfo);
 
-        return null;
+        return machineInfo;
     }
 
     @Override
