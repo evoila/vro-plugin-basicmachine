@@ -32,6 +32,25 @@ public class BasicMachineManager {
     @Autowired
     public ObjectFactory objectFactory;
 
+    /**
+     * Saves the configuration/resource of type {@link BasicMachineInfo} on the endpoint
+     * and caches the {@link BasicMachine} in local storage.
+     *
+     * @param name            of the machine
+     * @param ipAddress       of the machine
+     * @param dnsName         of the machine
+     * @param cpu             amount
+     * @param memory          size
+     * @param operatingSystem of the machine
+     * @param diskSize        of the machine
+     * @param powerState      of the machine
+     * @param snapshot
+     * @param initialUsername initial username
+     * @param initialPassword initial password
+     * @param description     of the virtual machine
+     * @param json            string
+     * @return the newly generated ID of the saved machine
+     */
     public String saveBasicMachine(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
 
         BasicMachineInfo machineInfo = new BasicMachineInfo();
@@ -60,6 +79,12 @@ public class BasicMachineManager {
         return machineInfo.getId().toString();
     }
 
+    /**
+     * Returns a {@link BasicMachine} from local storage by its ID.
+     *
+     * @param id of the {@link BasicMachine}
+     * @return the {@link FoundObject} of type {@link BasicMachine}
+     */
     public FoundObject<BasicMachine> getBasicMachineById(String id) {
 
         Sid sid = Sid.valueOf(id);
@@ -68,6 +93,12 @@ public class BasicMachineManager {
         return convertToFoundObject(sid, BasicMachine.class, basicMachine);
     }
 
+    /**
+     * Deletes a {@link BasicMachine} from the endpoint and
+     * removes it from local storage.
+     *
+     * @param id of the BasicMachine which should be deleted
+     */
     public void deleteBasicMachine(String id) {
 
         try {
@@ -83,6 +114,15 @@ public class BasicMachineManager {
 
     }
 
+    /**
+     * Converts/wraps a {@link BasicMachine} into a {@link FoundObject}.
+     * This method is needed because this class is a singleton and not a scripting class.
+     *
+     * @param rootId      if of the root
+     * @param desiredType desired type
+     * @param modelType   model type
+     * @return the converted {@link FoundObject} of type {@link BasicMachine}
+     */
     private FoundObject<BasicMachine> convertToFoundObject(Sid rootId, Class<BasicMachine> desiredType, BasicMachine modelType) {
 
         Sid id = objectFactory.assignId(desiredType, modelType, rootId);

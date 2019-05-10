@@ -9,7 +9,11 @@ import com.vmware.o11n.sdk.modeldriven.Sid;
 import java.util.Objects;
 import java.util.UUID;
 
-public class BasicMachineInfo{
+/**
+ * Containing all necessary information and configuration parameters
+ * of the {@link BasicMachine}.
+ */
+public class BasicMachineInfo {
 
     public static final String TYPE = "BasicMachineInfo";
 
@@ -57,110 +61,191 @@ public class BasicMachineInfo{
         this.json = json;
     }
 
+    /**
+     * @return name of the {@link BasicMachine}
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name of the {@link BasicMachine}
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @return ip-address of the {@link BasicMachine}
+     */
     public String getIpAddress() {
         return ipAddress;
     }
 
+    /**
+     * @param ipAddress of the {@link BasicMachine}
+     */
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
     }
 
+    /**
+     * @return dns-name of the {@link BasicMachine}
+     */
     public String getDnsName() {
         return dnsName;
     }
 
+    /**
+     * @param dnsName of the {@link BasicMachine}
+     */
     public void setDnsName(String dnsName) {
         this.dnsName = dnsName;
     }
 
+    /**
+     * @return cpus of the {@link BasicMachine}
+     */
     public String getCpu() {
         return cpu;
     }
 
+    /**
+     * @param cpu of the {@link BasicMachine}
+     */
     public void setCpu(String cpu) {
         this.cpu = cpu;
     }
 
+    /**
+     * @return memory of the {@link BasicMachine}
+     */
     public String getMemory() {
         return memory;
     }
 
+    /**
+     * @param memory of the {@link BasicMachine}
+     */
     public void setMemory(String memory) {
         this.memory = memory;
     }
 
+    /**
+     * @return operating system of the {@link BasicMachine}
+     */
     public String getOperatingSystem() {
         return operatingSystem;
     }
 
+    /**
+     * @param operatingSystem of the {@link BasicMachine}
+     */
     public void setOperatingSystem(String operatingSystem) {
         this.operatingSystem = operatingSystem;
     }
 
+    /**
+     * @return disk size of the {@link BasicMachine}
+     */
     public String getDiskSize() {
         return diskSize;
     }
 
+    /**
+     * @param diskSize of the {@link BasicMachine}
+     */
     public void setDiskSize(String diskSize) {
         this.diskSize = diskSize;
     }
 
+    /**
+     * @return power state of the {@link BasicMachine}
+     */
     public String getPowerState() {
         return powerState;
     }
 
+    /**
+     * @param powerState of the {@link BasicMachine}
+     */
     public void setPowerState(String powerState) {
         this.powerState = powerState;
     }
 
+    /**
+     * @return snapshots of the {@link BasicMachine}
+     */
     public String getSnapshot() {
         return snapshot;
     }
 
+    /**
+     * @param snapshot of the {@link BasicMachine}
+     */
     public void setSnapshot(String snapshot) {
         this.snapshot = snapshot;
     }
 
+    /**
+     * @return initial username of the {@link BasicMachine}
+     */
     public String getInitialUsername() {
         return initialUsername;
     }
 
+    /**
+     * @param initialUsername of the {@link BasicMachine}
+     */
     public void setInitialUsername(String initialUsername) {
         this.initialUsername = initialUsername;
     }
 
+    /**
+     * @return initial password of the {@link BasicMachine}
+     */
     public String getInitialPassword() {
         return initialPassword;
     }
 
+    /**
+     * @param initialPassword of the {@link BasicMachine}
+     */
     public void setInitialPassword(String initialPassword) {
         this.initialPassword = initialPassword;
     }
 
+    /**
+     * @return description of the {@link BasicMachine}
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description of the {@link BasicMachine}
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
+    /**
+     * @return json attached to the {@link BasicMachine}
+     */
     public String getJson() {
         return json;
     }
 
+    /**
+     * @param json wich should attached to the {@link BasicMachine}
+     */
     public void setJson(String json) {
         this.json = json;
     }
 
+    /**
+     * @return ID of the {@link BasicMachine}
+     */
     public Sid getId() {
         return id;
     }
