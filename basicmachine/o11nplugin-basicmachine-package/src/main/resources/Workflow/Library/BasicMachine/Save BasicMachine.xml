@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="986f7f05-9cd2-441f-b1fe-774f352610e7" version="0.0.5" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="986f7f05-9cd2-441f-b1fe-774f352610e7" version="0.0.6" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
   <display-name><![CDATA[Save BasicMachine]]></display-name>
   <description><![CDATA[Stores the configuration details persisten as a BasicMachine resource on the endpoint.]]></description>
   <position y="50.0" x="100.0"/>
@@ -62,7 +62,7 @@
  * @author Lars Atzinger <latzinger@evoila.de>
  */
 
-id = BasicMachineManager.save(owner,name,ipAddress,dnsName,cpu,memory,operatingSystem,diskSize,powerState,snapshot,initialUsername,initialPassword,description,json);
+id = BasicMachineManager.saveBasicMachine(owner,name,ipAddress,dnsName,cpu,memory,operatingSystem,diskSize,powerState,snapshot,initialUsername,initialPassword,description,json);
 basicMachine = BasicMachineManager.getBasicMachineById(id);
 System.log("BasicMachine " + name + " saved successfully with id: " + id);]]></script>
     <in-binding>

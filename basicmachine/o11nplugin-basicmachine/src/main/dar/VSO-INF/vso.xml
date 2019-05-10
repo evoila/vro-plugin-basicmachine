@@ -16,6 +16,7 @@
                 <property name="initialUsername" display-name="initialUsername" bean-property="initialUsername" show-in-column="true" show-in-description="true"></property>
                 <property name="description" display-name="description" bean-property="description" show-in-column="true" show-in-description="true"></property>
                 <property name="ipAddress" display-name="ipAddress" bean-property="ipAddress" show-in-column="true" show-in-description="true"></property>
+                <property name="owner" display-name="owner" bean-property="owner" show-in-column="true" show-in-description="true"></property>
                 <property name="displayName" display-name="displayName" bean-property="displayName" show-in-column="true" show-in-description="true"></property>
                 <property name="name" display-name="name" bean-property="name" show-in-column="true" show-in-description="true"></property>
                 <property name="dnsName" display-name="dnsName" bean-property="dnsName" show-in-column="true" show-in-description="true"></property>
@@ -45,8 +46,16 @@
         <object script-name="_BasicMachineManager" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachineManager_Wrapper" create="false" is-deprecated="false">
             <description></description>
             <constructors/>
-            <attributes/>
+            <attributes>
+                <attribute script-name="allBasicMachines" java-name="allBasicMachines" return-type="[BasicMachine" read-only="true"></attribute>
+            </attributes>
             <methods>
+                <method script-name="getBasicMachinesByDnsName" java-name="getBasicMachinesByDnsName" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="dnsName"></parameter>
+                    </parameters>
+                </method>
                 <method script-name="deleteBasicMachine" java-name="deleteBasicMachine" return-type="void">
                     <description></description>
                     <parameters>
@@ -59,9 +68,34 @@
                         <parameter type="String" name="id"></parameter>
                     </parameters>
                 </method>
+                <method script-name="getBasicMachinesByOperatingSystem" java-name="getBasicMachinesByOperatingSystem" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="operatingSystem"></parameter>
+                    </parameters>
+                </method>
+                <method script-name="getBasicMachinesByIpAddress" java-name="getBasicMachinesByIpAddress" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="ipAddress"></parameter>
+                    </parameters>
+                </method>
+                <method script-name="getBasicMachinesByName" java-name="getBasicMachinesByName" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="name"></parameter>
+                    </parameters>
+                </method>
+                <method script-name="getBasicMachinesByOwner" java-name="getBasicMachinesByOwner" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="owner"></parameter>
+                    </parameters>
+                </method>
                 <method script-name="saveBasicMachine" java-name="saveBasicMachine" return-type="String">
                     <description></description>
                     <parameters>
+                        <parameter type="String" name="owner"></parameter>
                         <parameter type="String" name="name"></parameter>
                         <parameter type="String" name="ipAddress"></parameter>
                         <parameter type="String" name="dnsName"></parameter>
@@ -84,6 +118,7 @@
             <description></description>
             <constructors/>
             <attributes>
+                <attribute script-name="owner" java-name="owner" return-type="String" read-only="false"></attribute>
                 <attribute script-name="memory" java-name="memory" return-type="String" read-only="false"></attribute>
                 <attribute script-name="displayName" java-name="displayName" return-type="String" read-only="true"></attribute>
                 <attribute script-name="ipAddress" java-name="ipAddress" return-type="String" read-only="false"></attribute>

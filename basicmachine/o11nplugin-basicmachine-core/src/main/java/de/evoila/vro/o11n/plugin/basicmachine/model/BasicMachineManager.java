@@ -12,6 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
 
 /**
  * vRO Singleton for save, delete and update BasicMachines on the endpoint.
@@ -98,6 +102,15 @@ public class BasicMachineManager {
     }
 
     /**
+     * Returns all {@link BasicMachine} found on local storage.
+     *
+     * @return array containing all found {@link BasicMachine} or null
+     */
+    public FoundObject<BasicMachine>[] getAllBasicMachines() {
+        return null;
+    }
+
+    /**
      * Deletes a {@link BasicMachine} from the endpoint and
      * removes it from local storage.
      *
@@ -124,9 +137,9 @@ public class BasicMachineManager {
      * Searches all {@link BasicMachine} by a given owner.
      *
      * @param owner which should be filtered
-     * @return array containing all found {@link BasicMachine}
+     * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachineByOwner(String owner) {
+    public FoundObject<BasicMachine>[] getBasicMachinesByOwner(String owner) {
         return null;
     }
 
@@ -134,9 +147,9 @@ public class BasicMachineManager {
      * Searches all {@link BasicMachine} by a given name.
      *
      * @param name which should be filtered
-     * @return array containing all found {@link BasicMachine}
+     * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachineByName(String name) {
+    public FoundObject<BasicMachine>[] getBasicMachinesByName(String name) {
         return null;
     }
 
@@ -144,9 +157,9 @@ public class BasicMachineManager {
      * Searches all {@link BasicMachine} by a given ip-address.
      *
      * @param ipAddress which should be filtered
-     * @return array containing all found {@link BasicMachine}
+     * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachineByIpAddress(String ipAddress) {
+    public FoundObject<BasicMachine>[] getBasicMachinesByIpAddress(String ipAddress) {
         return null;
     }
 
@@ -154,9 +167,9 @@ public class BasicMachineManager {
      * Searches all {@link BasicMachine} by a given dns-name.
      *
      * @param dnsName which should be filtered
-     * @return array containing all found {@link BasicMachine}
+     * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachineByDnsName(String dnsName) {
+    public FoundObject<BasicMachine>[] getBasicMachinesByDnsName(String dnsName) {
         return null;
     }
 
@@ -164,9 +177,9 @@ public class BasicMachineManager {
      * Searches all {@link BasicMachine} by a given operating system.
      *
      * @param operatingSystem which should be filtered
-     * @return array containing all found {@link BasicMachine}
+     * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachineByOperatingSystem(String operatingSystem) {
+    public FoundObject<BasicMachine>[] getBasicMachinesByOperatingSystem(String operatingSystem) {
         return null;
     }
 
