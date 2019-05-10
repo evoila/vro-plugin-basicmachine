@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="dbaf52ac-c97b-474d-8932-ec19422bc06f" version="0.0.3" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Delete BasicMachine]]></display-name>
+  <description><![CDATA[Removes a BasicMachine resource from the persistent storage on the endpoint.]]></description>
+  <position y="50.0" x="100.0"/>
+  <input>
+    <param name="id" type="string">
+      <description><![CDATA[id of the machine]]></description>
+    </param>
+  </input>
+  <workflow-item name="item0" type="end" end-mode="0">
+    <position y="45.40909090909091" x="384.5"/>
+  </workflow-item>
+  <workflow-item name="item1" out-name="item0" type="task">
+    <display-name><![CDATA[deleteBasicMachine]]></display-name>
+    <script encoded="false"><![CDATA[/**
+ * @author Lars Atzinger <latzinger@evoila.de>
+ */
+
+BasicMachineManager.delete(id);
+System.log("BasicMachine deleted successfully with id: " + id);]]></script>
+    <in-binding>
+      <bind name="id" type="string" export-name="id"/>
+    </in-binding>
+    <out-binding/>
+    <position y="55.40909090909091" x="204.5"/>
+  </workflow-item>
+  <presentation>
+    <p-param name="id">
+      <desc><![CDATA[id]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

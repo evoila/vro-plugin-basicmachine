@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
- */
-
 package de.evoila.vro.o11n.plugin.basicmachine.finder;
 
 import com.vmware.o11n.sdk.modeldriven.FoundObject;
@@ -18,6 +14,8 @@ import java.util.List;
 
 /**
  * {@inheritDoc}
+ *
+ * @author Lars Atzinger latzinger@evoila.de
  */
 public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
 

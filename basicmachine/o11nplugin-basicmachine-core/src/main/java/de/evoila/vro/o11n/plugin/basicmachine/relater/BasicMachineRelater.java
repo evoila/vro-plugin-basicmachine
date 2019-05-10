@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
- */
-
 package de.evoila.vro.o11n.plugin.basicmachine.relater;
 
 import com.vmware.o11n.sdk.modeldriven.ObjectRelater;
@@ -14,6 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@inheritDoc}
+ *
+ * @author Lars Atzinger latzinger@evoila.de
+ */
 public class BasicMachineRelater implements ObjectRelater<BasicMachine> {
 
     @Autowired

@@ -26,7 +26,7 @@
                 <version>${vco.version}</version>
                 <extensions>true</extensions>
                 <configuration>
-                    <packageName>de.evoila.vro.o11n.plugin.basicmachine</packageName>
+                    <packageName>com.vmware.library.basicmachine</packageName>
                     <!-- Set the local path to the *.vmokeystore file used to sign the content -->
                     <keystoreLocation>${keystoreLocation}</keystoreLocation>
                     <keystorePassword>${keystorePassword}</keystorePassword>

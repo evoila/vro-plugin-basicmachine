@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
- */
-
 package de.evoila.vro.o11n.plugin.basicmachine.config;
 
 import com.vmware.o11n.sdk.modeldriven.Sid;
@@ -13,6 +9,8 @@ import java.util.List;
  * Every Endpoint Configuration must implement this Interface.
  * An Endpoint is a location where the plug-in stores details of
  * the Type {@link BasicMachineInfo} by invoking the Orchestrator Persistence SDK.
+ *
+ * @author Lars Atzinger latzinger@evoila.de
  */
 public interface EndpointPersister {
 

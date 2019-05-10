@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
- */
-
 package de.evoila.vro.o11n.plugin.basicmachine.config;
 
 import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
@@ -9,6 +5,8 @@ import de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo;
 /**
  * Every subscriber of an endpoint configuration must implement this interface.
  * Its method will be invoked by the endpoint configuration update, delete and save operations.
+ *
+ * @author Lars Atzinger latzinger@evoila.de
  */
 public interface EndpointChangeListener {
 

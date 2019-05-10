@@ -1,0 +1,140 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<workflow xmlns="http://vmware.com/vco/workflow" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://vmware.com/vco/workflow http://vmware.com/vco/workflow/Workflow-v4.xsd" root-name="item1" object-name="workflow:name=generic" id="986f7f05-9cd2-441f-b1fe-774f352610e7" version="0.0.5" api-version="6.0.0" allowed-operations="vef" restartMode="1" resumeFromFailedMode="0">
+  <display-name><![CDATA[Save BasicMachine]]></display-name>
+  <description><![CDATA[Stores the configuration details persisten as a BasicMachine resource on the endpoint.]]></description>
+  <position y="50.0" x="100.0"/>
+  <input>
+    <param name="owner" type="string">
+      <description><![CDATA[owner of the machine]]></description>
+    </param>
+    <param name="name" type="string">
+      <description><![CDATA[name of the machine]]></description>
+    </param>
+    <param name="ipAddress" type="string">
+      <description><![CDATA[ip-address of the machine]]></description>
+    </param>
+    <param name="dnsName" type="string">
+      <description><![CDATA[dns-name of the machine]]></description>
+    </param>
+    <param name="cpu" type="string">
+      <description><![CDATA[cpu of the machine]]></description>
+    </param>
+    <param name="memory" type="string">
+      <description><![CDATA[memory of the machine]]></description>
+    </param>
+    <param name="operatingSystem" type="string">
+      <description><![CDATA[operating system of the machine]]></description>
+    </param>
+    <param name="diskSize" type="string">
+      <description><![CDATA[disk size of the machine]]></description>
+    </param>
+    <param name="powerState" type="string">
+      <description><![CDATA[power state of the machine]]></description>
+    </param>
+    <param name="snapshot" type="string">
+      <description><![CDATA[snapshots of the machine]]></description>
+    </param>
+    <param name="initialUsername" type="string">
+      <description><![CDATA[initial username of the machine]]></description>
+    </param>
+    <param name="initialPassword" type="string">
+      <description><![CDATA[initial password of the machine]]></description>
+    </param>
+    <param name="description" type="string">
+      <description><![CDATA[description of the machine]]></description>
+    </param>
+    <param name="json" type="string">
+      <description><![CDATA[json string]]></description>
+    </param>
+  </input>
+  <output>
+    <param name="basicMachine" type="BasicMachine:BasicMachine">
+      <description><![CDATA[BasicMachine that was stored on the endpoint]]></description>
+    </param>
+  </output>
+  <attrib name="id" type="string" read-only="false">
+    <value encoded="n"><![CDATA[]]></value>
+    <description><![CDATA[id of the machine]]></description>
+  </attrib>
+  <workflow-item name="item1" out-name="item3" type="task">
+    <display-name><![CDATA[saveBasicMachine]]></display-name>
+    <script encoded="false"><![CDATA[/**
+ * @author Lars Atzinger <latzinger@evoila.de>
+ */
+
+id = BasicMachineManager.save(owner,name,ipAddress,dnsName,cpu,memory,operatingSystem,diskSize,powerState,snapshot,initialUsername,initialPassword,description,json);
+basicMachine = BasicMachineManager.getBasicMachineById(id);
+System.log("BasicMachine " + name + " saved successfully with id: " + id);]]></script>
+    <in-binding>
+      <bind name="name" type="string" export-name="name"/>
+      <bind name="ipAddress" type="string" export-name="ipAddress"/>
+      <bind name="dnsName" type="string" export-name="dnsName"/>
+      <bind name="cpu" type="string" export-name="cpu"/>
+      <bind name="memory" type="string" export-name="memory"/>
+      <bind name="operatingSystem" type="string" export-name="operatingSystem"/>
+      <bind name="diskSize" type="string" export-name="diskSize"/>
+      <bind name="powerState" type="string" export-name="powerState"/>
+      <bind name="snapshot" type="string" export-name="snapshot"/>
+      <bind name="initialUsername" type="string" export-name="initialUsername"/>
+      <bind name="initialPassword" type="string" export-name="initialPassword"/>
+      <bind name="description" type="string" export-name="description"/>
+      <bind name="json" type="string" export-name="json"/>
+      <bind name="owner" type="string" export-name="owner"/>
+      <bind name="id" type="string" export-name="id">
+        <description><![CDATA[id of the machine]]></description>
+      </bind>
+    </in-binding>
+    <out-binding>
+      <bind name="basicMachine" type="BasicMachine:BasicMachine" export-name="basicMachine"/>
+      <bind name="id" type="string" export-name="id"/>
+    </out-binding>
+    <position y="55.40909090909091" x="184.5"/>
+  </workflow-item>
+  <workflow-item name="item3" type="end" end-mode="0">
+    <position y="45.40909090909091" x="364.5"/>
+  </workflow-item>
+  <presentation>
+    <p-param name="owner">
+      <desc><![CDATA[owner of the machine]]></desc>
+    </p-param>
+    <p-param name="name">
+      <desc><![CDATA[name of the machine]]></desc>
+    </p-param>
+    <p-param name="ipAddress">
+      <desc><![CDATA[ip-address of the machine]]></desc>
+    </p-param>
+    <p-param name="dnsName">
+      <desc><![CDATA[dns-name of the machine]]></desc>
+    </p-param>
+    <p-param name="cpu">
+      <desc><![CDATA[cpu of the machine]]></desc>
+    </p-param>
+    <p-param name="memory">
+      <desc><![CDATA[memory of the machine]]></desc>
+    </p-param>
+    <p-param name="operatingSystem">
+      <desc><![CDATA[operating system of the machine]]></desc>
+    </p-param>
+    <p-param name="diskSize">
+      <desc><![CDATA[disk size of the machine]]></desc>
+    </p-param>
+    <p-param name="powerState">
+      <desc><![CDATA[power state of the machine]]></desc>
+    </p-param>
+    <p-param name="snapshot">
+      <desc><![CDATA[snapshots of the machine]]></desc>
+    </p-param>
+    <p-param name="initialUsername">
+      <desc><![CDATA[initial username of the machine]]></desc>
+    </p-param>
+    <p-param name="initialPassword">
+      <desc><![CDATA[initial password of the machine]]></desc>
+    </p-param>
+    <p-param name="description">
+      <desc><![CDATA[description of the machine]]></desc>
+    </p-param>
+    <p-param name="json">
+      <desc><![CDATA[json string]]></desc>
+    </p-param>
+  </presentation>
+</workflow>

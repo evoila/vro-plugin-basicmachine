@@ -2,8 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <comment>Exported from [server]</comment>
-<entry key="categoryPath">de.evoila.latzinger.basicmachine.content</entry>
-<entry key="categoryPathEscaped">ZGUuZXZvaWxhLmxhdHppbmdlcg==.YmFzaWNtYWNoaW5l.Y29udGVudA==</entry>
+<entry key="categoryPath">Library.BasicMachine</entry>
+<entry key="categoryPathEscaped">TGlicmFyeQ==.QmFzaWNNYWNoaW5l</entry>
 <entry key="name">Delete BasicMachine</entry>
 <entry key="type">Workflow</entry>
 <entry key="id">dbaf52ac-c97b-474d-8932-ec19422bc06f</entry>

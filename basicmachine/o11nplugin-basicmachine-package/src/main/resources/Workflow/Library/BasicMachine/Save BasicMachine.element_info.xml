@@ -3,7 +3,8 @@
 <properties>
 <comment>Exported from [server]</comment>
 <entry key="categoryPath">Library.BasicMachine</entry>
-<entry key="name">Hello world</entry>
+<entry key="categoryPathEscaped">TGlicmFyeQ==.QmFzaWNNYWNoaW5l</entry>
+<entry key="name">Save BasicMachine</entry>
 <entry key="type">Workflow</entry>
-<entry key="id">9993475837951223458723498127494237512</entry>
+<entry key="id">986f7f05-9cd2-441f-b1fe-774f352610e7</entry>
 </properties>

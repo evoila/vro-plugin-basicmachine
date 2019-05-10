@@ -1,17 +1,15 @@
-/*
- * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
- */
-
 package de.evoila.vro.o11n.plugin.basicmachine;
-
-
 
 import com.vmware.o11n.sdk.modeldrivengen.mapping.*;
 
 import com.vmware.o11n.sdk.modeldrivengen.model.*;
 import com.google.inject.*;
+
 import java.util.*;
 
+/**
+ * @author Lars Atzinger latzinger@evoila.de
+ */
 public class CustomModule extends AbstractModule {
 
     private final Plugin plugin;

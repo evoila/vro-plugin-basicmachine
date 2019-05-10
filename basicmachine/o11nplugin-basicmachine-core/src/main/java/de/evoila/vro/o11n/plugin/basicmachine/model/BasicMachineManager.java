@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
- */
-
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
 import com.vmware.o11n.plugin.sdk.spring.platform.GlobalPluginNotificationHandler;
@@ -17,6 +13,11 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
+/**
+ * vRO Singleton for save, delete and update BasicMachines on the endpoint.
+ *
+ * @author Lars Atzinger latzinger@evoila.de
+ */
 @Component
 @Scope(value = "prototype")
 public class BasicMachineManager {

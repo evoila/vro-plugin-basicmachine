@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2019 Lars Atzinger latzinger@evoila.de
- */
-
 package de.evoila.vro.o11n.plugin.basicmachine.config;
 
 import ch.dunes.vso.sdk.endpoints.IEndpointConfiguration;
@@ -21,9 +17,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 /**
  * Concrete Implementation of an configuration endpoint.
+ *
+ * @author Lars Atzinger latzinger@evoila.de
  */
 @Component
 public class BasicMachineEndpoint implements EndpointPersister {
