@@ -4,7 +4,7 @@
 Configurations/Resources will stored persistent ✔ <br/>
 Configurations/Resources will cached by the plugin for better performance ✔ <br/>
 Configurations/Resources show up in the plugin inventory ✔ <br/>
-Workflow included for save, delete and update BasciMachine's ✔ <br/>
+Workflow included for save, delete and update BasicMachine's ✔ <br/>
 
 ### BasicMachine:BasicMachine (*Type*)
 
