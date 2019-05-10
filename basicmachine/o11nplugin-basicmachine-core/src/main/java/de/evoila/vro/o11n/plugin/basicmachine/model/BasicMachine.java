@@ -85,15 +85,22 @@ public class BasicMachine implements Findable {
      * Updates the {@link BasicMachineInfo} when the endpoint has changed its configuration.
      * This method is called by the subscribed endpoint automatically.
      *
-     * @param machineInfo which was updated
+     * @param basicMachineInfo which was updated
      */
-    public synchronized void update(BasicMachineInfo machineInfo) {
+    public synchronized void update(BasicMachineInfo basicMachineInfo) {
 
-        if (machineInfo != null && !(this.machineInfo.getId().equals(machineInfo.getId()))) {
-            throw new RuntimeException("BasicMachine ID does not match. Can not update different Object");
+        if (basicMachineInfo == null) {
+            LOG.error("Failed while updating BasicMachine (basicMachineInfo is null)!");
+            throw new RuntimeException("Failed while updating BasicMachine (basicMachineInfo is null)!");
         }
 
-        this.machineInfo = machineInfo;
+        if (!(basicMachineInfo.getId().equals(getInternalId()))) {
+            LOG.error("Failed while updating BasicMachine (ID's are not matching).");
+            throw new RuntimeException("Failed while updating BasicMachine (ID's are not matching).");
+        }
+
+        this.machineInfo = basicMachineInfo;
+        LOG.debug(basicMachineInfo + " has changed its configuration.");
     }
 
     /**

@@ -265,21 +265,22 @@ public class BasicMachineInfo {
 
     @Override
     public String toString() {
-        return "Summary["
-                + "id=" + id
-                + " name=" + name
-                + " ipAddress=" + ipAddress
-                + " dnsName=" + dnsName
-                + " cpu=" + cpu
-                + " memory=" + memory
-                + " operatingSystem=" + operatingSystem
-                + " diskSize=" + diskSize
-                + " powerState=" + powerState
-                + " snapshot=" + snapshot
-                + " initialUsername=" + initialUsername
-                + " initialPassword=" + initialPassword
-                + " description=" + description
-                + " json=" + json + "]";
+        return "BasicMachine::BasicMachineInfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", ipAddress='" + ipAddress + '\'' +
+                ", dnsName='" + dnsName + '\'' +
+                ", cpu='" + cpu + '\'' +
+                ", memory='" + memory + '\'' +
+                ", operatingSystem='" + operatingSystem + '\'' +
+                ", diskSize='" + diskSize + '\'' +
+                ", powerState='" + powerState + '\'' +
+                ", snapshot='" + snapshot + '\'' +
+                ", initialUsername='" + initialUsername + '\'' +
+                ", initialPassword='" + initialPassword + '\'' +
+                ", description='" + description + '\'' +
+                ", json='" + json + '\'' +
+                '}';
     }
 
 }
