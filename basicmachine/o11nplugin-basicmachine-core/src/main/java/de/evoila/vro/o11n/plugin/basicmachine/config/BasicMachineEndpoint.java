@@ -21,7 +21,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 /**
- *
+ * Concrete Implementation of an configuration endpoint.
  */
 @Component
 public class BasicMachineEndpoint implements EndpointPersister {
