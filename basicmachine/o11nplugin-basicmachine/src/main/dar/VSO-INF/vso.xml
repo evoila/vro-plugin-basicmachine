@@ -47,19 +47,19 @@
             <constructors/>
             <attributes/>
             <methods>
+                <method script-name="deleteBasicMachine" java-name="deleteBasicMachine" return-type="void">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="id"></parameter>
+                    </parameters>
+                </method>
                 <method script-name="getBasicMachineById" java-name="getBasicMachineById" return-type="BasicMachine">
                     <description></description>
                     <parameters>
                         <parameter type="String" name="id"></parameter>
                     </parameters>
                 </method>
-                <method script-name="delete" java-name="delete" return-type="void">
-                    <description></description>
-                    <parameters>
-                        <parameter type="String" name="id"></parameter>
-                    </parameters>
-                </method>
-                <method script-name="save" java-name="save" return-type="String">
+                <method script-name="saveBasicMachine" java-name="saveBasicMachine" return-type="String">
                     <description></description>
                     <parameters>
                         <parameter type="String" name="name"></parameter>

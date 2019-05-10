@@ -25,6 +25,7 @@ public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
     private LocalRepository localRepository;
 
     /**
+     * Returns a BasicMachine from local storage by its ID.
      * {@inheritDoc}
      *
      * @param pluginContext
@@ -38,6 +39,7 @@ public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
     }
 
     /**
+     * Returns a BasicMachine from local storage by its name or returns all.
      * {@inheritDoc}
      *
      * @param pluginContext
@@ -64,6 +66,7 @@ public class BasicMachineFinder implements ObjectFinder<BasicMachine> {
     }
 
     /**
+     * Assigns the internalId from {@link de.evoila.vro.o11n.plugin.basicmachine.model.BasicMachineInfo}
      * {@inheritDoc}
      *
      * @param basicMachine
