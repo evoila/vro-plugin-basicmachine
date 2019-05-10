@@ -121,6 +121,56 @@ public class BasicMachineManager {
     }
 
     /**
+     * Searches all {@link BasicMachine} by a given owner.
+     *
+     * @param owner which should be filtered
+     * @return array containing all found {@link BasicMachine}
+     */
+    public FoundObject<BasicMachine>[] getBasicMachineByOwner(String owner) {
+        return null;
+    }
+
+    /**
+     * Searches all {@link BasicMachine} by a given name.
+     *
+     * @param name which should be filtered
+     * @return array containing all found {@link BasicMachine}
+     */
+    public FoundObject<BasicMachine>[] getBasicMachineByName(String name) {
+        return null;
+    }
+
+    /**
+     * Searches all {@link BasicMachine} by a given ip-address.
+     *
+     * @param ipAddress which should be filtered
+     * @return array containing all found {@link BasicMachine}
+     */
+    public FoundObject<BasicMachine>[] getBasicMachineByIpAddress(String ipAddress) {
+        return null;
+    }
+
+    /**
+     * Searches all {@link BasicMachine} by a given dns-name.
+     *
+     * @param dnsName which should be filtered
+     * @return array containing all found {@link BasicMachine}
+     */
+    public FoundObject<BasicMachine>[] getBasicMachineByDnsName(String dnsName) {
+        return null;
+    }
+
+    /**
+     * Searches all {@link BasicMachine} by a given operating system.
+     *
+     * @param operatingSystem which should be filtered
+     * @return array containing all found {@link BasicMachine}
+     */
+    public FoundObject<BasicMachine>[] getBasicMachineByOperatingSystem(String operatingSystem) {
+        return null;
+    }
+
+    /**
      * Converts/wraps a {@link BasicMachine} into a {@link FoundObject}.
      * This method is needed because this class is a singleton and not a scripting class.
      *
