@@ -53,42 +53,43 @@ public class BasicMachineManager {
      */
     public String saveBasicMachine(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
 
-        BasicMachineInfo machineInfo = new BasicMachineInfo();
-        machineInfo.setName(name);
-        machineInfo.setIpAddress(ipAddress);
-        machineInfo.setDnsName(dnsName);
-        machineInfo.setCpu(cpu);
-        machineInfo.setMemory(memory);
-        machineInfo.setOperatingSystem(operatingSystem);
-        machineInfo.setDiskSize(diskSize);
-        machineInfo.setPowerState(powerState);
-        machineInfo.setSnapshot(snapshot);
-        machineInfo.setInitialUsername(initialUsername);
-        machineInfo.setInitialPassword(initialPassword);
-        machineInfo.setDescription(description);
-        machineInfo.setJson(json);
+        BasicMachineInfo basicMachineInfo = new BasicMachineInfo();
+        basicMachineInfo.setName(name);
+        basicMachineInfo.setIpAddress(ipAddress);
+        basicMachineInfo.setDnsName(dnsName);
+        basicMachineInfo.setCpu(cpu);
+        basicMachineInfo.setMemory(memory);
+        basicMachineInfo.setOperatingSystem(operatingSystem);
+        basicMachineInfo.setDiskSize(diskSize);
+        basicMachineInfo.setPowerState(powerState);
+        basicMachineInfo.setSnapshot(snapshot);
+        basicMachineInfo.setInitialUsername(initialUsername);
+        basicMachineInfo.setInitialPassword(initialPassword);
+        basicMachineInfo.setDescription(description);
+        basicMachineInfo.setJson(json);
 
-        machineInfo = basicMachineEndpoint.save(machineInfo);
+        basicMachineInfo = basicMachineEndpoint.save(basicMachineInfo);
 
         notificationHandler.notifyElementsInvalidate();
 
-        LOG.info("Saved BasicMachine{" +
-                "machineInfo=" + machineInfo +
-                '}');
+        LOG.info("Saved " + basicMachineInfo);
 
-        return machineInfo.getId().toString();
+        return basicMachineInfo.getId().toString();
     }
 
     /**
      * Returns a {@link BasicMachine} from local storage by its ID.
      *
      * @param id of the {@link BasicMachine}
-     * @return the {@link FoundObject} of type {@link BasicMachine}
+     * @return the {@link FoundObject} of type {@link BasicMachine} or null
      */
     public FoundObject<BasicMachine> getBasicMachineById(String id) {
 
         Sid sid = Sid.valueOf(id);
         BasicMachine basicMachine = localRepository.findById(sid);
+
+        if (basicMachine == null)
+            return null;
 
         return convertToFoundObject(sid, BasicMachine.class, basicMachine);
     }
@@ -107,8 +108,10 @@ public class BasicMachineManager {
 
             basicMachineEndpoint.delete(basicMachine.getMachineInfo());
 
+            LOG.info("Deleted BasicMachine with id:" + id);
+
         } catch (IllegalArgumentException e) {
-            LOG.error("Failed to delete BasicMachine with id:" + id);
+            LOG.error("Failed while deleting BasicMachine with id:" + id, e);
             throw new RuntimeException(e);
         }
 
