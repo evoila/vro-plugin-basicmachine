@@ -19,6 +19,7 @@ public class BasicMachineInfo {
 
     private final Sid id;
 
+    private String owner;
     private String name;
     private String ipAddress;
     private String dnsName;
@@ -43,9 +44,10 @@ public class BasicMachineInfo {
         id = Sid.valueOf(UUID.randomUUID().toString());
     }
 
-    public BasicMachineInfo(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
+    public BasicMachineInfo(String owner, String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
         super();
         id = Sid.valueOf(UUID.randomUUID().toString());
+        this.owner = owner;
         this.name = name;
         this.ipAddress = ipAddress;
         this.dnsName = dnsName;
@@ -237,7 +239,7 @@ public class BasicMachineInfo {
     }
 
     /**
-     * @param json wich should attached to the {@link BasicMachine}
+     * @param json which should attached to the {@link BasicMachine}
      */
     public void setJson(String json) {
         this.json = json;
@@ -248,6 +250,20 @@ public class BasicMachineInfo {
      */
     public Sid getId() {
         return id;
+    }
+
+    /**
+     * @return owner of the {@link BasicMachine}
+     */
+    public String getOwner() {
+        return owner;
+    }
+
+    /**
+     * @param owner which should bet set
+     */
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     @Override
@@ -265,8 +281,9 @@ public class BasicMachineInfo {
 
     @Override
     public String toString() {
-        return "BasicMachine::BasicMachineInfo{" +
+        return "BasicMachineInfo{" +
                 "id=" + id +
+                ", owner='" + owner + '\'' +
                 ", name='" + name + '\'' +
                 ", ipAddress='" + ipAddress + '\'' +
                 ", dnsName='" + dnsName + '\'' +
@@ -282,5 +299,4 @@ public class BasicMachineInfo {
                 ", json='" + json + '\'' +
                 '}';
     }
-
 }

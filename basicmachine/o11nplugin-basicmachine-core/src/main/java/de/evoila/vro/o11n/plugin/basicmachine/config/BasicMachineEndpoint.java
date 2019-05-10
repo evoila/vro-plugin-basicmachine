@@ -343,6 +343,7 @@ public class BasicMachineEndpoint implements EndpointPersister {
 
         try {
 
+            endpointConfiguration.setString("owner", basicMachineInfo.getOwner());
             endpointConfiguration.setString("id", basicMachineInfo.getId().toString());
             endpointConfiguration.setString("name", basicMachineInfo.getName());
             endpointConfiguration.setString("ipAddress", basicMachineInfo.getIpAddress());
@@ -368,36 +369,37 @@ public class BasicMachineEndpoint implements EndpointPersister {
     /**
      * Creates a new {@link BasicMachineInfo} and copies the content of the given {@link IEndpointConfiguration} into it.
      *
-     * @param iEndpointConfiguration which content should be copied
+     * @param endpointConfiguration which content should be copied
      * @return the created {@link BasicMachineInfo} with the content of the iEndpointConfiguration
      * @throws Exception
      */
-    private BasicMachineInfo convertToBasicMachineInfo(IEndpointConfiguration iEndpointConfiguration) {
+    private BasicMachineInfo convertToBasicMachineInfo(IEndpointConfiguration endpointConfiguration) {
 
         try {
 
-            Sid sid = Sid.valueOf(iEndpointConfiguration.getString("id"));
+            Sid sid = Sid.valueOf(endpointConfiguration.getString("id"));
 
             BasicMachineInfo basicMachineInfo = new BasicMachineInfo(sid);
 
-            basicMachineInfo.setName(iEndpointConfiguration.getString("name"));
-            basicMachineInfo.setIpAddress(iEndpointConfiguration.getString("ipAddress"));
-            basicMachineInfo.setDnsName(iEndpointConfiguration.getString("dnsName"));
-            basicMachineInfo.setCpu(iEndpointConfiguration.getString("cpu"));
-            basicMachineInfo.setMemory(iEndpointConfiguration.getString("memory"));
-            basicMachineInfo.setOperatingSystem(iEndpointConfiguration.getString("operatingSystem"));
-            basicMachineInfo.setDiskSize(iEndpointConfiguration.getString("diskSize"));
-            basicMachineInfo.setPowerState(iEndpointConfiguration.getString("powerState"));
-            basicMachineInfo.setSnapshot(iEndpointConfiguration.getString("snapshot"));
-            basicMachineInfo.setInitialUsername(iEndpointConfiguration.getString("initialUsername"));
-            basicMachineInfo.setInitialPassword(iEndpointConfiguration.getString("initialPassword"));
-            basicMachineInfo.setDescription(iEndpointConfiguration.getString("description"));
-            basicMachineInfo.setJson(iEndpointConfiguration.getString("json"));
+            basicMachineInfo.setOwner(endpointConfiguration.getString("owner"));
+            basicMachineInfo.setName(endpointConfiguration.getString("name"));
+            basicMachineInfo.setIpAddress(endpointConfiguration.getString("ipAddress"));
+            basicMachineInfo.setDnsName(endpointConfiguration.getString("dnsName"));
+            basicMachineInfo.setCpu(endpointConfiguration.getString("cpu"));
+            basicMachineInfo.setMemory(endpointConfiguration.getString("memory"));
+            basicMachineInfo.setOperatingSystem(endpointConfiguration.getString("operatingSystem"));
+            basicMachineInfo.setDiskSize(endpointConfiguration.getString("diskSize"));
+            basicMachineInfo.setPowerState(endpointConfiguration.getString("powerState"));
+            basicMachineInfo.setSnapshot(endpointConfiguration.getString("snapshot"));
+            basicMachineInfo.setInitialUsername(endpointConfiguration.getString("initialUsername"));
+            basicMachineInfo.setInitialPassword(endpointConfiguration.getString("initialPassword"));
+            basicMachineInfo.setDescription(endpointConfiguration.getString("description"));
+            basicMachineInfo.setJson(endpointConfiguration.getString("json"));
 
             return basicMachineInfo;
 
         } catch (IllegalArgumentException e) {
-            LOG.error("Failed while converting IEndpointConfiguration [" + iEndpointConfiguration.getId() + "] to BasicMachineInfo!", e);
+            LOG.error("Failed while converting IEndpointConfiguration [" + endpointConfiguration.getId() + "] to BasicMachineInfo!", e);
             throw new RuntimeException(e);
         }
 

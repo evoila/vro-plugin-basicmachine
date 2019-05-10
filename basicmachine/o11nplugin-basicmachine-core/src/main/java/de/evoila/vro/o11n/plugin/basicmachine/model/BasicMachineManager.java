@@ -36,6 +36,7 @@ public class BasicMachineManager {
      * Saves the configuration/resource of type {@link BasicMachineInfo} on the endpoint
      * and caches the {@link BasicMachine} in local storage.
      *
+     * @param owner           of the machine
      * @param name            of the machine
      * @param ipAddress       of the machine
      * @param dnsName         of the machine
@@ -51,9 +52,10 @@ public class BasicMachineManager {
      * @param json            string
      * @return the newly generated ID of the saved machine
      */
-    public String saveBasicMachine(String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
+    public String saveBasicMachine(String owner, String name, String ipAddress, String dnsName, String cpu, String memory, String operatingSystem, String diskSize, String powerState, String snapshot, String initialUsername, String initialPassword, String description, String json) {
 
         BasicMachineInfo basicMachineInfo = new BasicMachineInfo();
+        basicMachineInfo.setOwner(owner);
         basicMachineInfo.setName(name);
         basicMachineInfo.setIpAddress(ipAddress);
         basicMachineInfo.setDnsName(dnsName);

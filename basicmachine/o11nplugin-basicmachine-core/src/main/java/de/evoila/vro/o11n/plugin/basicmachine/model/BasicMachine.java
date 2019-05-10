@@ -345,10 +345,28 @@ public class BasicMachine implements Findable {
     }
 
     /**
+     * Changes the owner of the {@link BasicMachine} and forces the endpoint to update its
+     * persisted configuration/resource.
+     *
+     * @param owner which should be set
+     */
+    public void setOwner(String owner) {
+        machineInfo.setOwner(owner);
+        stateChanged();
+    }
+
+    /**
+     * @return the owner of the {@link BasicMachine}
+     */
+    public String getOwner() {
+        return machineInfo.getOwner();
+    }
+
+    /**
      * @return the display name which will shown in the inventory of the plugin
      */
     public String getDisplayName() {
-        return getMachineInfo().getName() + " [" + getMachineInfo().getIpAddress() + "]";
+        return getMachineInfo().getName();
     }
 
 
