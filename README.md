@@ -1,5 +1,7 @@
 # vro-plugin-basicmachine
 
+Plugin was tested in vRealize Automation 7.5.0. ✅
+
 ## Functionality
 Configurations/Resources will stored persistent ✔ <br/>
 Configurations/Resources will cached by the plugin for better performance ✔ <br/>
@@ -11,6 +13,7 @@ Workflow included for save, delete and update BasicMachine's ✔ <br/>
 #### BasicMachine (ScriptingObject)
 
 ##### Properties
+* owner (*String*)
 * name (*String*)
 * ipAddress (*String*)
 * dnsName (*String*)
@@ -28,7 +31,7 @@ Workflow included for save, delete and update BasicMachine's ✔ <br/>
 #### BasicMachineManager (*Singleton*)
 
 ##### Methods
-* *saveBasicMachine(name, ipAddress, dnsName, cpu, memory, operatingSystem, diskSize, powerState, snapshot, initialUsername, initialPassword, description, json)*
+* *saveBasicMachine(owner, name, ipAddress, dnsName, cpu, memory, operatingSystem, diskSize, powerState, snapshot, initialUsername, initialPassword, description, json)*
 * *deleteBasicMachine(id)*
 * *getBasicMachineByID(id)*
 
@@ -38,6 +41,7 @@ Example:
 ```javascript
 var bm = BasicMachineManager.getBasicMachineById(id);
 
+bm.owner = "johndoe"
 bm.name = "machineA";
 bm.ipAddress = "0.0.0.0";
 bm.dnsName = "machineA";
