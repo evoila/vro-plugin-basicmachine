@@ -107,7 +107,9 @@ public class BasicMachineManager {
      * @return array containing all found {@link BasicMachine} or null
      */
     public FoundObject<BasicMachine>[] getAllBasicMachines() {
-        return null;
+        Collection<BasicMachine> basicMachines = localRepository.findAll();
+
+        return convertToFoundObjects(basicMachines);
     }
 
     /**
@@ -198,6 +200,28 @@ public class BasicMachineManager {
 
         return new FoundObject(modelType, id);
 
+    }
+
+    /**
+     * Converts a collection of {@link BasicMachine} to an Array of {@link FoundObject} from Type {@link BasicMachine}.
+     *
+     * @param basicMachines collection of machines which should be converted
+     * @return array of found {@link FoundObject} of Type {@link BasicMachine}
+     */
+    private FoundObject<BasicMachine>[] convertToFoundObjects(Collection<BasicMachine> basicMachines) {
+
+        List<FoundObject<BasicMachine>> convertedMachines = basicMachines
+                .stream()
+                .map(basicMachine -> convertToFoundObject(basicMachine.getInternalId(), BasicMachine.class, basicMachine))
+                .collect(Collectors.toList());
+
+        FoundObject<BasicMachine>[] foundObjects = new FoundObject[basicMachines.size()];
+
+        for (int i = 0; i < foundObjects.length; i++) {
+            foundObjects[i] = convertedMachines.get(i);
+        }
+
+        return foundObjects;
     }
 
 }
