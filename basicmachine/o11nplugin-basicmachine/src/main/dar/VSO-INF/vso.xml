@@ -46,9 +46,7 @@
         <object script-name="_BasicMachineManager" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachineManager_Wrapper" create="false" is-deprecated="false">
             <description></description>
             <constructors/>
-            <attributes>
-                <attribute script-name="allBasicMachines" java-name="allBasicMachines" return-type="[Object" read-only="true"></attribute>
-            </attributes>
+            <attributes/>
             <methods>
                 <method script-name="deleteBasicMachine" java-name="deleteBasicMachine" return-type="void">
                     <description></description>
@@ -67,6 +65,10 @@
                     <parameters>
                         <parameter type="String" name="owner"></parameter>
                     </parameters>
+                </method>
+                <method script-name="allBasicMachines" java-name="allBasicMachines" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters/>
                 </method>
                 <method script-name="getBasicMachinesByDnsName" java-name="getBasicMachinesByDnsName" return-type="[BasicMachine">
                     <description></description>
