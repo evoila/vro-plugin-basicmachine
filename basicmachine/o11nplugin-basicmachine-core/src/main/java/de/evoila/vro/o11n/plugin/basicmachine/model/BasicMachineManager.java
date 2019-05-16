@@ -98,7 +98,7 @@ public class BasicMachineManager {
         if (basicMachine == null)
             return null;
 
-        return convertToFoundObject(sid, BasicMachine.class, basicMachine);
+        return convertToFoundObject(basicMachine);
     }
 
     /**
@@ -106,8 +106,11 @@ public class BasicMachineManager {
      *
      * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getAllBasicMachines() {
+    public FoundObject<BasicMachine>[] getAllBasicMachines(String dummy) {
         Collection<BasicMachine> basicMachines = localRepository.findAll();
+
+        if (basicMachines == null)
+            return null;
 
         return convertToFoundObjects(basicMachines);
     }
@@ -203,6 +206,16 @@ public class BasicMachineManager {
     }
 
     /**
+     * Converts/wraps a {@link BasicMachine} into a {@link FoundObject}.
+     *
+     * @param basicMachine machine which should be converted
+     * @return the converted {@link FoundObject} of type {@link BasicMachine}
+     */
+    private FoundObject<BasicMachine> convertToFoundObject(BasicMachine basicMachine) {
+        return convertToFoundObject(basicMachine.getInternalId(), BasicMachine.class, basicMachine);
+    }
+
+    /**
      * Converts a collection of {@link BasicMachine} to an Array of {@link FoundObject} from Type {@link BasicMachine}.
      *
      * @param basicMachines collection of machines which should be converted
@@ -212,10 +225,10 @@ public class BasicMachineManager {
 
         List<FoundObject<BasicMachine>> convertedMachines = basicMachines
                 .stream()
-                .map(basicMachine -> convertToFoundObject(basicMachine.getInternalId(), BasicMachine.class, basicMachine))
+                .map(basicMachine -> convertToFoundObject(basicMachine))
                 .collect(Collectors.toList());
 
-        FoundObject<BasicMachine>[] foundObjects = new FoundObject[basicMachines.size()];
+        FoundObject<BasicMachine>[] foundObjects = new FoundObject[convertedMachines.size()];
 
         for (int i = 0; i < foundObjects.length; i++) {
             foundObjects[i] = convertedMachines.get(i);
