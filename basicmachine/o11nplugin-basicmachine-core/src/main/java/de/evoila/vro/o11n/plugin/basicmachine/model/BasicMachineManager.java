@@ -107,7 +107,7 @@ public class BasicMachineManager {
      *
      * @return list containing all found {@link BasicMachine} or null
      */
-    public List<FoundObject<BasicMachine>> getAllBasicMachines() {
+    public List<FoundObject<BasicMachine>> allBasicMachines() {
         Collection<BasicMachine> basicMachines = localRepository.findAll();
 
         if (basicMachines.size() == 0)
