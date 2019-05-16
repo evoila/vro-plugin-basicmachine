@@ -23,6 +23,7 @@ public class CustomModule extends AbstractModule {
     public CustomModule() {
         this.plugin = new Plugin();
 
+        plugin.setVersion("1.1.1");
         plugin.setApiPrefix("");
         plugin.setIcon("folder.png");
         plugin.setDescription("BasicMachine Plugin");

@@ -111,11 +111,23 @@ public class BasicMachineManager {
     public List<FoundObject<BasicMachine>> getAllBasicMachinesAsList(String filter) {
         Collection<BasicMachine> basicMachines = localRepository.findAll();
 
-        if (basicMachines == null)
+        if (basicMachines.size() == 0)
             return null;
 
         return convertToFoundObjects(basicMachines);
     }
+
+    //TEST
+
+    public List<FoundObject<BasicMachine>> methodA() {
+        return null;
+    }
+
+    public List<BasicMachine> methodB() {
+        return null;
+    }
+
+    //TEST END
 
     /**
      * Deletes a {@link BasicMachine} from the endpoint and
@@ -147,7 +159,15 @@ public class BasicMachineManager {
      * @return array containing all found {@link BasicMachine} or null
      */
     public List<FoundObject<BasicMachine>> getBasicMachinesByOwner(String owner) {
-        return null;
+        Collection<BasicMachine> basicMachines = localRepository.findAll();
+
+        if (basicMachines.size() == 0)
+            return null;
+
+        List<BasicMachine> result = basicMachines.parallelStream().filter(basicMachine -> basicMachine.getOwner().equals(owner)).collect(Collectors.toList());
+
+        return convertToFoundObjects(result);
+
     }
 
     /**
@@ -157,7 +177,14 @@ public class BasicMachineManager {
      * @return array containing all found {@link BasicMachine} or null
      */
     public List<FoundObject<BasicMachine>> getBasicMachinesByName(String name) {
-        return null;
+        Collection<BasicMachine> basicMachines = localRepository.findAll();
+
+        if (basicMachines.size() == 0)
+            return null;
+
+        List<BasicMachine> result = basicMachines.parallelStream().filter(basicMachine -> basicMachine.getName().equals(name)).collect(Collectors.toList());
+
+        return convertToFoundObjects(basicMachines);
     }
 
     /**
@@ -167,7 +194,15 @@ public class BasicMachineManager {
      * @return array containing all found {@link BasicMachine} or null
      */
     public List<FoundObject<BasicMachine>> getBasicMachinesByIpAddress(String ipAddress) {
-        return null;
+        Collection<BasicMachine> basicMachines = localRepository.findAll();
+
+        if (basicMachines.size() == 0)
+            return null;
+
+        List<BasicMachine> result = basicMachines.parallelStream().filter(basicMachine -> basicMachine.getIpAddress().equals(ipAddress)).collect(Collectors.toList());
+
+        return convertToFoundObjects(basicMachines);
+
     }
 
     /**
@@ -177,7 +212,14 @@ public class BasicMachineManager {
      * @return array containing all found {@link BasicMachine} or null
      */
     public List<FoundObject<BasicMachine>> getBasicMachinesByDnsName(String dnsName) {
-        return null;
+        Collection<BasicMachine> basicMachines = localRepository.findAll();
+
+        if (basicMachines.size() == 0)
+            return null;
+
+        List<BasicMachine> result = basicMachines.parallelStream().filter(basicMachine -> basicMachine.getDnsName().equals(dnsName)).collect(Collectors.toList());
+
+        return convertToFoundObjects(basicMachines);
     }
 
     /**
@@ -187,7 +229,14 @@ public class BasicMachineManager {
      * @return array containing all found {@link BasicMachine} or null
      */
     public List<FoundObject<BasicMachine>> getBasicMachinesByOperatingSystem(String operatingSystem) {
-        return null;
+        Collection<BasicMachine> basicMachines = localRepository.findAll();
+
+        if (basicMachines.size() == 0)
+            return null;
+
+        List<BasicMachine> result = basicMachines.parallelStream().filter(basicMachine -> basicMachine.getOperatingSystem().equals(operatingSystem)).collect(Collectors.toList());
+
+        return convertToFoundObjects(basicMachines);
     }
 
     /**

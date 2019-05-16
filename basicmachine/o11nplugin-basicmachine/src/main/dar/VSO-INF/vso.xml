@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<module name="BasicMachine" version="${project.version}" build-number="" image="images/folder.png" display-name="BasicMachine">
+<module name="BasicMachine" version="1.1.1" build-number="" image="images/folder.png" display-name="BasicMachine">
     <description>BasicMachine Plugin</description>
     <installation mode="${installation.mode}">
         <action resource="packages/de.evoila.vro.o11n.plugin.basicmachine" type="install-package"/>
@@ -48,11 +48,9 @@
             <constructors/>
             <attributes/>
             <methods>
-                <method script-name="getBasicMachinesByDnsName" java-name="getBasicMachinesByDnsName" return-type="[BasicMachine">
+                <method script-name="methodB" java-name="methodB" return-type="[BasicMachine">
                     <description></description>
-                    <parameters>
-                        <parameter type="String" name="dnsName"></parameter>
-                    </parameters>
+                    <parameters/>
                 </method>
                 <method script-name="deleteBasicMachine" java-name="deleteBasicMachine" return-type="void">
                     <description></description>
@@ -66,40 +64,26 @@
                         <parameter type="String" name="id"></parameter>
                     </parameters>
                 </method>
-                <method script-name="getBasicMachinesByOperatingSystem" java-name="getBasicMachinesByOperatingSystem" return-type="[BasicMachine">
-                    <description></description>
-                    <parameters>
-                        <parameter type="String" name="operatingSystem"></parameter>
-                    </parameters>
-                </method>
-                <method script-name="getBasicMachinesByIpAddress" java-name="getBasicMachinesByIpAddress" return-type="[BasicMachine">
-                    <description></description>
-                    <parameters>
-                        <parameter type="String" name="ipAddress"></parameter>
-                    </parameters>
-                </method>
-                <method script-name="getAllBasicMachines" java-name="getAllBasicMachines" return-type="[BasicMachine">
-                    <description></description>
-                    <parameters>
-                        <parameter type="String" name="dummy"></parameter>
-                    </parameters>
-                </method>
-                <method script-name="getBasicMachinesByName" java-name="getBasicMachinesByName" return-type="[BasicMachine">
-                    <description></description>
-                    <parameters>
-                        <parameter type="String" name="name"></parameter>
-                    </parameters>
-                </method>
                 <method script-name="getBasicMachinesByOwner" java-name="getBasicMachinesByOwner" return-type="[BasicMachine">
                     <description></description>
                     <parameters>
                         <parameter type="String" name="owner"></parameter>
                     </parameters>
                 </method>
-                <method script-name="getAllBasicMachinesAsListListCast" java-name="getAllBasicMachinesAsListListCast" return-type="[BasicMachine">
+                <method script-name="methodA" java-name="methodA" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters/>
+                </method>
+                <method script-name="getBasicMachinesByDnsName" java-name="getBasicMachinesByDnsName" return-type="[BasicMachine">
                     <description></description>
                     <parameters>
-                        <parameter type="String" name="dummy"></parameter>
+                        <parameter type="String" name="dnsName"></parameter>
+                    </parameters>
+                </method>
+                <method script-name="getBasicMachinesByOperatingSystem" java-name="getBasicMachinesByOperatingSystem" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="operatingSystem"></parameter>
                     </parameters>
                 </method>
                 <method script-name="saveBasicMachine" java-name="saveBasicMachine" return-type="String">
@@ -124,13 +108,19 @@
                 <method script-name="getAllBasicMachinesAsList" java-name="getAllBasicMachinesAsList" return-type="[BasicMachine">
                     <description></description>
                     <parameters>
-                        <parameter type="String" name="dummy"></parameter>
+                        <parameter type="String" name="filter"></parameter>
                     </parameters>
                 </method>
-                <method script-name="getAllBasicMachinesAsListList" java-name="getAllBasicMachinesAsListList" return-type="[BasicMachine">
+                <method script-name="getBasicMachinesByIpAddress" java-name="getBasicMachinesByIpAddress" return-type="[BasicMachine">
                     <description></description>
                     <parameters>
-                        <parameter type="String" name="dummy"></parameter>
+                        <parameter type="String" name="ipAddress"></parameter>
+                    </parameters>
+                </method>
+                <method script-name="getBasicMachinesByName" java-name="getBasicMachinesByName" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="name"></parameter>
                     </parameters>
                 </method>
             </methods>
