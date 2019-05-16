@@ -105,10 +105,9 @@ public class BasicMachineManager {
     /**
      * Returns all {@link BasicMachine} found on local storage.
      *
-     * @param filter not used - workaround for displaying as a method not as property
      * @return list containing all found {@link BasicMachine} or null
      */
-    public List<FoundObject<BasicMachine>> getAllBasicMachinesAsList(String filter) {
+    public List<FoundObject<BasicMachine>> getAllBasicMachinesAsList() {
         Collection<BasicMachine> basicMachines = localRepository.findAll();
 
         if (basicMachines.size() == 0)
@@ -116,18 +115,6 @@ public class BasicMachineManager {
 
         return convertToFoundObjects(basicMachines);
     }
-
-    //TEST
-
-    public List<FoundObject<BasicMachine>> methodA() {
-        return null;
-    }
-
-    public List<BasicMachine> methodB() {
-        return null;
-    }
-
-    //TEST END
 
     /**
      * Deletes a {@link BasicMachine} from the endpoint and
