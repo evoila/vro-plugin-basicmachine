@@ -1,5 +1,6 @@
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
+import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
 import com.vmware.o11n.plugin.sdk.spring.platform.GlobalPluginNotificationHandler;
 import com.vmware.o11n.sdk.modeldriven.FoundObject;
 import com.vmware.o11n.sdk.modeldriven.ObjectFactory;
@@ -104,9 +105,10 @@ public class BasicMachineManager {
     /**
      * Returns all {@link BasicMachine} found on local storage.
      *
-     * @return array containing all found {@link BasicMachine} or null
+     * @param filter not used - workaround for displaying as a method not as property
+     * @return list containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getAllBasicMachines(String dummy) {
+    public List<FoundObject<BasicMachine>> getAllBasicMachinesAsList(String filter) {
         Collection<BasicMachine> basicMachines = localRepository.findAll();
 
         if (basicMachines == null)
@@ -144,7 +146,7 @@ public class BasicMachineManager {
      * @param owner which should be filtered
      * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachinesByOwner(String owner) {
+    public List<FoundObject<BasicMachine>> getBasicMachinesByOwner(String owner) {
         return null;
     }
 
@@ -154,7 +156,7 @@ public class BasicMachineManager {
      * @param name which should be filtered
      * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachinesByName(String name) {
+    public List<FoundObject<BasicMachine>> getBasicMachinesByName(String name) {
         return null;
     }
 
@@ -164,7 +166,7 @@ public class BasicMachineManager {
      * @param ipAddress which should be filtered
      * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachinesByIpAddress(String ipAddress) {
+    public List<FoundObject<BasicMachine>> getBasicMachinesByIpAddress(String ipAddress) {
         return null;
     }
 
@@ -174,7 +176,7 @@ public class BasicMachineManager {
      * @param dnsName which should be filtered
      * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachinesByDnsName(String dnsName) {
+    public List<FoundObject<BasicMachine>> getBasicMachinesByDnsName(String dnsName) {
         return null;
     }
 
@@ -184,7 +186,7 @@ public class BasicMachineManager {
      * @param operatingSystem which should be filtered
      * @return array containing all found {@link BasicMachine} or null
      */
-    public FoundObject<BasicMachine>[] getBasicMachinesByOperatingSystem(String operatingSystem) {
+    public List<FoundObject<BasicMachine>> getBasicMachinesByOperatingSystem(String operatingSystem) {
         return null;
     }
 
@@ -221,7 +223,7 @@ public class BasicMachineManager {
      * @param basicMachines collection of machines which should be converted
      * @return array of found {@link FoundObject} of Type {@link BasicMachine}
      */
-    private FoundObject<BasicMachine>[] convertToFoundObjects(Collection<BasicMachine> basicMachines) {
+    private FoundObject<BasicMachine>[] convertToFoundObjectsToArray(Collection<BasicMachine> basicMachines) {
 
         List<FoundObject<BasicMachine>> convertedMachines = basicMachines
                 .stream()
@@ -235,6 +237,22 @@ public class BasicMachineManager {
         }
 
         return foundObjects;
+    }
+
+    /**
+     * Converts a collection of {@link BasicMachine} to an List of {@link FoundObject} from Type {@link BasicMachine}.
+     *
+     * @param basicMachines collection of machines which should be converted
+     * @return list of found {@link FoundObject} of Type {@link BasicMachine}
+     */
+    private List<FoundObject<BasicMachine>> convertToFoundObjects(Collection<BasicMachine> basicMachines) {
+
+        List<FoundObject<BasicMachine>> convertedMachines = basicMachines
+                .stream()
+                .map(basicMachine -> convertToFoundObject(basicMachine))
+                .collect(Collectors.toList());
+
+        return convertedMachines;
     }
 
 }

@@ -75,7 +75,7 @@ public class BasicMachine implements Findable {
     @Override
     public String toString() {
         return "BasicMachine{" +
-                "machineInfo=" + machineInfo +
+                machineInfo +
                 '}';
     }
 

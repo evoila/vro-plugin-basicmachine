@@ -96,6 +96,12 @@
                         <parameter type="String" name="owner"></parameter>
                     </parameters>
                 </method>
+                <method script-name="getAllBasicMachinesAsListListCast" java-name="getAllBasicMachinesAsListListCast" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="dummy"></parameter>
+                    </parameters>
+                </method>
                 <method script-name="saveBasicMachine" java-name="saveBasicMachine" return-type="String">
                     <description></description>
                     <parameters>
@@ -113,6 +119,18 @@
                         <parameter type="String" name="initialPassword"></parameter>
                         <parameter type="String" name="description"></parameter>
                         <parameter type="String" name="json"></parameter>
+                    </parameters>
+                </method>
+                <method script-name="getAllBasicMachinesAsList" java-name="getAllBasicMachinesAsList" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="dummy"></parameter>
+                    </parameters>
+                </method>
+                <method script-name="getAllBasicMachinesAsListList" java-name="getAllBasicMachinesAsListList" return-type="[BasicMachine">
+                    <description></description>
+                    <parameters>
+                        <parameter type="String" name="dummy"></parameter>
                     </parameters>
                 </method>
             </methods>
