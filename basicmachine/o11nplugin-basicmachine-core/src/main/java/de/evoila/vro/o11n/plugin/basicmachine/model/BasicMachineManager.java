@@ -1,6 +1,5 @@
 package de.evoila.vro.o11n.plugin.basicmachine.model;
 
-import com.vmware.o11n.plugin.sdk.annotation.VsoMethod;
 import com.vmware.o11n.plugin.sdk.spring.platform.GlobalPluginNotificationHandler;
 import com.vmware.o11n.sdk.modeldriven.FoundObject;
 import com.vmware.o11n.sdk.modeldriven.ObjectFactory;
@@ -129,6 +128,8 @@ public class BasicMachineManager {
             BasicMachine basicMachine = localRepository.findById(sid);
 
             basicMachineEndpoint.delete(basicMachine.getMachineInfo());
+
+            notificationHandler.notifyElementsInvalidate();
 
             LOG.info("Deleted BasicMachine with id:" + id);
 
