@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<module name="BasicMachine" version="1.1.1" build-number="" image="images/folder.png" display-name="BasicMachine">
+<module name="BasicMachine" version="1.0" build-number="" image="images/folder.png" display-name="BasicMachine">
     <description>BasicMachine Plugin</description>
     <installation mode="${installation.mode}">
         <action resource="packages/de.evoila.vro.o11n.plugin.basicmachine" type="install-package"/>
@@ -46,12 +46,10 @@
         <object script-name="_BasicMachineManager" java-class="de.evoila.vro.o11n.plugin.basicmachine_gen.BasicMachineManager_Wrapper" create="false" is-deprecated="false">
             <description></description>
             <constructors/>
-            <attributes/>
+            <attributes>
+                <attribute script-name="allBasicMachines" java-name="allBasicMachines" return-type="[Object" read-only="true"></attribute>
+            </attributes>
             <methods>
-                <method script-name="methodB" java-name="methodB" return-type="[BasicMachine">
-                    <description></description>
-                    <parameters/>
-                </method>
                 <method script-name="deleteBasicMachine" java-name="deleteBasicMachine" return-type="void">
                     <description></description>
                     <parameters>
@@ -69,10 +67,6 @@
                     <parameters>
                         <parameter type="String" name="owner"></parameter>
                     </parameters>
-                </method>
-                <method script-name="methodA" java-name="methodA" return-type="[BasicMachine">
-                    <description></description>
-                    <parameters/>
                 </method>
                 <method script-name="getBasicMachinesByDnsName" java-name="getBasicMachinesByDnsName" return-type="[BasicMachine">
                     <description></description>
@@ -103,12 +97,6 @@
                         <parameter type="String" name="initialPassword"></parameter>
                         <parameter type="String" name="description"></parameter>
                         <parameter type="String" name="json"></parameter>
-                    </parameters>
-                </method>
-                <method script-name="getAllBasicMachinesAsList" java-name="getAllBasicMachinesAsList" return-type="[BasicMachine">
-                    <description></description>
-                    <parameters>
-                        <parameter type="String" name="filter"></parameter>
                     </parameters>
                 </method>
                 <method script-name="getBasicMachinesByIpAddress" java-name="getBasicMachinesByIpAddress" return-type="[BasicMachine">
