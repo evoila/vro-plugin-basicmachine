@@ -3,7 +3,7 @@
 <properties>
 <comment>vra-appliance.intern.evoila.cloud:443</comment>
 <entry key="vso-build-nb">10044239</entry>
-<entry key="pkg-description">Workflows include in BasicMachine plugin.</entry>
+<entry key="pkg-description">Workflows included in BasicMachine plugin.</entry>
 <entry key="pkg-name">com.vmware.library.basicmachine</entry>
 <entry key="used-plugins">BasicMachine#1.0.0-SNAPSHOT</entry>
 <entry key="pkg-owner">O=VMware,OU=Unknown,CN=vRO vra-appliance.intern.evoila.cloud b470a84f-286e-44a9-9a34-b28d5c063a8b</entry>
