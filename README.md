@@ -62,3 +62,11 @@ bm.initialPassword = "password";
 bm.description = "this is an example";
 bm.json = "json string goes here";
 ```
+
+## Screenhots
+
+### API Explorer
+<img src="https://github.com/latzinger/vro-plugin-basicmachine/blob/master/images/apiexplorer.png" alt="API-Explorer"/>
+
+### Plugin Inventory
+<img src="https://github.com/latzinger/vro-plugin-basicmachine/blob/master/images/inventory.png" alt="Inventory"/>
