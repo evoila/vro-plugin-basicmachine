@@ -34,6 +34,12 @@ Workflow included for save, delete and update BasicMachine's ✔ <br/>
 * *saveBasicMachine(owner, name, ipAddress, dnsName, cpu, memory, operatingSystem, diskSize, powerState, snapshot, initialUsername, initialPassword, description, json)*
 * *deleteBasicMachine(id)*
 * *getBasicMachineByID(id)*
+* *allBasicMachines()*
+* *getBasicMachinesByOwner(owner)*
+* *getBasicMachinesByName(name)*
+* *getBasicMachinesByOperatingSystem(operatingSystem)*
+* *getBasicMachinesByDnsName(dnsName)*
+* *getBasicMachinesByIpAddress(ipAddress)*
 
 Note: All properties can also be accessed and modified directly!
 
