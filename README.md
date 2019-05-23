@@ -3,7 +3,9 @@
 The BasicMachine plugin allows persistent storage of information about virtual machines as resources within the VMware vRealize Orchestrator. The stored resources of the type BasicMachine are displayed graphically in the plugin inventory.
 The so-called class BasicMachineManager provides methods to create, update, and remove these resources. It also offers several methods for querying and filtering.
 
-Plugin was tested in vRealize Automation 7.5.0. ✅
+#### Plugin was tested under <br/>
+vRealize Automation 7.5.0, vRealize Automation 7.4.0 and vRealize Orchestrator 7.6.0 ✅
+
 
 ## Functionality
 Configurations/Resources will stored persistent ✔ <br/>
