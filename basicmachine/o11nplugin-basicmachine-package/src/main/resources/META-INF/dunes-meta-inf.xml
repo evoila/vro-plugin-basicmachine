@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>vra-appliance.intern.evoila.cloud:443</comment>
+<entry key="vso-build-nb">10044239</entry>
+<entry key="pkg-description"></entry>
+<entry key="pkg-name">com.vmware.library.basicmachine</entry>
+<entry key="used-plugins"></entry>
+<entry key="pkg-owner">O=VMware,OU=Unknown,CN=vRO vra-appliance.intern.evoila.cloud b470a84f-286e-44a9-9a34-b28d5c063a8b</entry>
+<entry key="vso-version">7.5.0.10044239</entry>
+<entry key="pkg-id">ff8080816ae876b0016ae8c5c6ae000d</entry>
+</properties>

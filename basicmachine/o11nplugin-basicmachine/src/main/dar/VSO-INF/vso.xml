@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<module name="BasicMachine" version="1.0" build-number="" image="images/folder.png" display-name="BasicMachine">
-    <description>BasicMachine Plugin</description>
+<module name="BasicMachine" version="${project.version}" build-number="" image="images/folder.png" display-name="BasicMachine">
+    <description>BasicMachine Plugin for vRealize Orchestrator</description>
     <installation mode="${installation.mode}">
-        <action resource="packages/de.evoila.vro.o11n.plugin.basicmachine" type="install-package"/>
+        <action resource="packages/o11nplugin-basicmachine-package-${project.version}.package" type="install-package"/>
     </installation>
     <inventory type="_ROOT"/>
     <finder-datasources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Exported from [server]</comment>
+<entry key="categoryPath">Library.BasicMachine.configuration</entry>
+<entry key="categoryPathEscaped">TGlicmFyeQ==.QmFzaWNNYWNoaW5l.Y29uZmlndXJhdGlvbg==</entry>
+<entry key="name">Delete BasicMachine</entry>
+<entry key="type">Workflow</entry>
+<entry key="id">dbaf52ac-c97b-474d-8932-ec19422bc06f</entry>
+</properties>

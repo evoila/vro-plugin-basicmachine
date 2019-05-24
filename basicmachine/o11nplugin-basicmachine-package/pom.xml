@@ -9,7 +9,7 @@
     <parent>
         <artifactId>basicmachine</artifactId>
         <groupId>de.evoila.vro.o11n.plugin.basicmachine</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0</version>
     </parent>
 
     <properties>
@@ -34,8 +34,12 @@
                         <include>**/Library/BasicMachine/**/*.element_info.xml</include>
                     </includes>
                     <packageFileName>o11nplugin-basicmachine-package-${project.version}</packageFileName>
-                    <allowedMask>vef</allowedMask>
+                    <allowedMask>vf</allowedMask>
                     <exportVersionHistory>false</exportVersionHistory>
+                    <serverConnection/>
+                    <serverPassword/>
+                    <serverUsername/>
+                    <workflowId/>
                 </configuration>
             </plugin>
         </plugins>
