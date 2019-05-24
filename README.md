@@ -4,8 +4,7 @@ The BasicMachine plugin allows persistent storage of information about virtual m
 The so-called class BasicMachineManager provides methods to create, update, and remove these resources. It also offers several methods for querying and filtering.
 
 #### Plugin was tested under <br/>
-vRealize Automation 7.5.0, vRealize Automation 7.4.0 and vRealize Orchestrator 7.6.0 ✅
-
+vRealize Automation 7.5.0, vRealize Automation 7.4.0, vRealize Automation 7.3.1  and vRealize Orchestrator 7.6.0 ✅
 
 ## Functionality
 Configurations/Resources will stored persistent ✔ <br/>
