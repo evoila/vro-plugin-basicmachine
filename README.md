@@ -12,6 +12,24 @@ Configurations/Resources will cached by the plugin for better performance ✔ <b
 Configurations/Resources show up in the plugin inventory ✔ <br/>
 Workflow included for save, delete and update BasicMachine's ✔ <br/>
 
+### Predefined Workflows
+
+* Save BasicMachine <br/>
+-Stores the configuration details persisten as a BasicMachine resource on the endpoint.
+* Delete BasicMachine <br/>
+-Removes a BasicMachine resource from the persistent storage on the endpoint.
+
+#### Import Workflows
+
+1. Download [o11nplugin-basicmachine-package-1.0.package](https://github.com/evoila/vro-plugin-basicmachine/releases/download/v1.0/o11nplugin-basicmachine-package-1.0.package).
+2. Change from Run to Design in the Drop-Box on the Top of the Window.
+3. Select the package icon from the tabs.
+4. Select the import package icon right under the Design Drop-Box.
+5. Browse the downloaded package file and click open.
+6. When the Package Import Information pop-up click import.
+7. Select the Workflows and click Import Selected elements.
+
+
 ### BasicMachine:BasicMachine (*Type*)
 
 #### BasicMachine (ScriptingObject)
