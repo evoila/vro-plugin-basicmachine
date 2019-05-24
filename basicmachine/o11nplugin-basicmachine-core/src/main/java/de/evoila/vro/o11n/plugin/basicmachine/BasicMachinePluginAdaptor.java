@@ -16,4 +16,5 @@ public class BasicMachinePluginAdaptor extends AbstractModelDrivenAdaptor {
     protected String getRuntimeConfigurationPath() {
         return RUNTIME_PROPERTIES_LOCATION;
     }
+
 }

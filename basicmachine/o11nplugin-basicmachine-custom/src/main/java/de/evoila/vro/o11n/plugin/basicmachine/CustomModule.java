@@ -22,15 +22,14 @@ public class CustomModule extends AbstractModule {
 
     public CustomModule() {
         this.plugin = new Plugin();
-
-        plugin.setVersion("1.0");
+        plugin.setVersion("${project.version}");
         plugin.setApiPrefix("");
-        plugin.setIcon("folder.png");
-        plugin.setDescription("BasicMachine Plugin");
         plugin.setBuild("");
-        plugin.setDisplayName("BasicMachine");
+        plugin.setIcon("folder.png");
         plugin.setName("BasicMachine");
-        plugin.setPackages(Collections.singletonList("de.evoila.vro.o11n.plugin.basicmachine"));
+        plugin.setDisplayName("BasicMachine");
+        plugin.setDescription("BasicMachine Plugin for vRealize Orchestrator");
+        plugin.setPackages(Collections.singletonList("o11nplugin-basicmachine-package-${project.version}.package"));
         plugin.setAdaptorClassName(de.evoila.vro.o11n.plugin.basicmachine.BasicMachinePluginAdaptor.class);
     }
 }
