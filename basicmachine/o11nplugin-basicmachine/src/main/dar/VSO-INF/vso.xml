@@ -25,6 +25,7 @@
                 <property name="initialPassword" display-name="initialPassword" bean-property="initialPassword" show-in-column="true" show-in-description="true"></property>
                 <property name="powerState" display-name="powerState" bean-property="powerState" show-in-column="true" show-in-description="true"></property>
                 <property name="snapshot" display-name="snapshot" bean-property="snapshot" show-in-column="true" show-in-description="true"></property>
+                <property name="id" display-name="id" bean-property="id" show-in-column="true" show-in-description="true"></property>
                 <property name="cpu" display-name="cpu" bean-property="cpu" show-in-column="true" show-in-description="true"></property>
                 <property name="operatingSystem" display-name="operatingSystem" bean-property="operatingSystem" show-in-column="true" show-in-description="true"></property>
                 <property name="diskSize" display-name="diskSize" bean-property="diskSize" show-in-column="true" show-in-description="true"></property>
@@ -134,6 +135,7 @@
                 <attribute script-name="initialPassword" java-name="initialPassword" return-type="String" read-only="false"></attribute>
                 <attribute script-name="name" java-name="name" return-type="String" read-only="false"></attribute>
                 <attribute script-name="json" java-name="json" return-type="String" read-only="false"></attribute>
+                <attribute script-name="id" java-name="id" return-type="String" read-only="true"></attribute>
                 <attribute script-name="snapshot" java-name="snapshot" return-type="String" read-only="false"></attribute>
             </attributes>
             <methods/>

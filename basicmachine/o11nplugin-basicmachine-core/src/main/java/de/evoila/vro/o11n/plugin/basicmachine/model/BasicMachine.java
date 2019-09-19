@@ -109,6 +109,13 @@ public class BasicMachine implements Findable {
     }
 
     /**
+     * @return the id of the {@link BasicMachine}
+     */
+    public String getId() {
+        return machineInfo.getId().toString();
+    }
+
+    /**
      * @return the name of the {@link BasicMachine}
      */
     public String getName() {

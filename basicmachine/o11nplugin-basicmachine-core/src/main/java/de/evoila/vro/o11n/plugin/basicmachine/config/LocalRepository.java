@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -43,7 +44,10 @@ public class LocalRepository implements EndpointChangeListener, InitializingBean
      * @return local saved {@link BasicMachine} or null
      */
     public BasicMachine findById(Sid id) {
-        return basicmachines.get(id);
+    	BasicMachineInfo basicMachineInfo = basicMachineEndpoint.findById(id);
+    	BasicMachine basicMachine = (BasicMachine) applicationContext.getBean("basicMachine", basicMachineInfo);
+    	basicmachines.put(basicMachine.getInternalId(), basicMachine);
+    	return basicMachine;
     }
 
     /**
@@ -52,6 +56,12 @@ public class LocalRepository implements EndpointChangeListener, InitializingBean
      * @return a collection of all local cached {@link BasicMachine} or null
      */
     public Collection<BasicMachine> findAll() {
+        basicmachines = new ConcurrentHashMap<>();
+    	List<BasicMachineInfo> basicMachineInfos = basicMachineEndpoint.findAll();
+    	for (BasicMachineInfo basicMachineInfo : basicMachineInfos) {
+    		BasicMachine basicMachine = (BasicMachine) applicationContext.getBean("basicMachine", basicMachineInfo);
+        	basicmachines.put(basicMachine.getInternalId(), basicMachine);
+		}
         return basicmachines.values();
     }
 
